@@ -175,10 +175,10 @@
                 <mxCell id="52" value="auth/check" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;fontSize=9;" vertex="1" parent="1">
                     <mxGeometry x="630" y="130" width="140" height="70" as="geometry"/>
                 </mxCell>
-                <mxCell id="53" value="URL Params:&lt;br&gt;- token" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;fontSize=9;" vertex="1" parent="52">
+                <mxCell id="53" value="URL Params:&lt;br&gt;- token (from Cookies)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;fontSize=9;" vertex="1" parent="52">
                     <mxGeometry y="30" width="140" height="40" as="geometry"/>
                 </mxCell>
-                <mxCell id="54" value="" style="endArrow=classic;html=1;exitX=1;exitY=0;exitDx=0;exitDy=0;entryX=-0.027;entryY=0.173;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="26" target="52">
+                <mxCell id="54" value="" style="endArrow=classic;html=1;exitX=1;exitY=0;exitDx=0;exitDy=0;entryX=0;entryY=0.25;entryDx=0;entryDy=0;" edge="1" parent="1" source="26" target="52">
                     <mxGeometry width="50" height="50" relative="1" as="geometry">
                         <mxPoint x="290" y="190" as="sourcePoint"/>
                         <mxPoint x="480" y="59.99999999999994" as="targetPoint"/>
@@ -192,6 +192,21 @@
                             <mxPoint x="610" y="120"/>
                         </Array>
                     </mxGeometry>
+                </mxCell>
+                <mxCell id="56" value="" style="endArrow=classic;html=1;fontSize=9;exitX=1;exitY=0.75;exitDx=0;exitDy=0;entryX=-0.002;entryY=0.161;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="29" target="57">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="520" y="130" as="sourcePoint"/>
+                        <mxPoint x="620" y="230" as="targetPoint"/>
+                        <Array as="points">
+                            <mxPoint x="500" y="170"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="57" value="token" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;fontSize=9;" vertex="1" parent="1">
+                    <mxGeometry x="630" y="220" width="140" height="70" as="geometry"/>
+                </mxCell>
+                <mxCell id="58" value="JSON Fields:&lt;br&gt;: user-id" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;fontSize=9;" vertex="1" parent="57">
+                    <mxGeometry y="30" width="140" height="40" as="geometry"/>
                 </mxCell>
             </root>
         </mxGraphModel>
