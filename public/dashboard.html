@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Dashboard</title>
+        <link id="cssFile" rel="stylesheet" type="text/css" href="styleDashboard.css">
+    </head>
+    <body>
+        <div id="topSection">
+            <div id="leftSideTop"></div>
+                <h2 id="dashTitle"><a href="./dashboard.html">Dashboard</a></h2>
+                <h3 class="topOptions"><a href="./explore.html">Explore</a></h3>
+                <h3 class="topOptions"><a href="./help.html">Help</a></h3>
+            </div>
+            <div id="rightSideTop" >
+                <h2 id="profileOption">My Profile</h2>
+            </div>
+        </div>
+        <div id="content">
+            <h3 id="recents">Recently Viewed</h3>
+            <div class="recentFunction">
+                <h4 class="formName">formula name</h4>
+                <p class="formula">formula here</p>
+                <button class="viewEdit">View/Edit</button>
+                <hr>
+            </div>
+            <div class="recentFunction">
+                <h4 class="formName">formula name</h4>
+                <p class="formula">formula here</p>
+                <button class="viewEdit">View/Edit</button>
+                <hr>
+            </div>
+            <div class="recentFunction">
+                <h4 class="formName">formula name</h4>
+                <p class="formula">formula here</p>
+                <button class="viewEdit">View/Edit</button>
+                <hr>
+            </div>
+            <button id="viewAll" onclick="goToViewAll()">View All</button>
+        </div>
+        <script src="./script.js"></script>
+        <script src="mathjax-config.js" defer></script>
+        <script type="text/javascript" id="MathJax-script" defer
+            src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+        </script>
+    </body>
+</html>
