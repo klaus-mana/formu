@@ -5,7 +5,9 @@ const formulaSchema = new Schema({
     name: String,
     description: String,
     raw_latex: String,
-    user_id: String
+    user_id: String,
+    tags: [String],
+    public: Boolean
 });
 
 module.exports = mongoose.model('Formula', formulaSchema);
