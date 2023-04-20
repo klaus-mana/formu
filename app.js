@@ -34,13 +34,16 @@ app.post('/auth/register', async (req, res) => {
 });
 
 app.post('/auth/login', async (req, res) => {
-    if (!req.username || !req.password) res.status(403).send('Invalid Parameters.');
+    if (!req.body.username || !req.body.password) res.status(403).send('Invalid Parameters.');
 
     try {
-        const user = await User.findOne({username: req.username});
+        const user = await User.findOne({username: req.body.username});
         if (!user) res.status(403).send('Username and/or Password Incorrect.');
-        const correctPass = user.loginWith(req.password);
-        if (!correctPass) res.status(403).send('Username and/or Password Incorrect.');
+        const correctPass = user.loginWith(req.body.password);
+        if (!correctPass) {
+            res.status(403).send('Username and/or Password Incorrect.');
+            return;
+        }
 
         const token = {user_id: user._id};
         res.status(200).send(JSON.stringify(token));
@@ -60,7 +63,7 @@ app.get('/auth/check', async (req, res) => {
 });
 
 app.listen(port, ()  => {
-
+    console.log(`🟢 Listening on ${port}`);
 });
 
 //===========CLIENT ROUTES===========//
