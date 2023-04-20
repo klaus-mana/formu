@@ -91,3 +91,70 @@ a:hover {
     text-decoration: none; 
     color:#8BB174
 }
+
+.recentFunction{
+    margin-left: 45px;
+    padding-top:15px;
+    padding-bottom:15px
+}
+
+.formName {
+    color:#426B69;
+    padding-bottom:5px;
+    margin-bottom:10px;
+    font-size:18px;
+    font-weight: 900;
+    margin-top:30px
+}
+.formula {
+    margin-left:15px;
+    margin-top:15px;
+    margin-bottom: 20px;
+    color:#8B878A;
+    font-size: 22px;
+    width: 50vw;
+    display:inline;
+    padding-top:100px;
+    padding-bottom:10px
+}
+
+hr{
+    color:#426B69;
+    position:absolute;
+    background-color:#426B69;
+    width: 80vw;
+    align-self:center;
+    height:4px;
+    margin-left: 3.5vw;
+    padding-left:0;
+    border-style:none;
+    margin-top:20px;
+    text-align:center;
+}
+
+#search{
+    width: 70vw;
+    text-align:left;
+    border-radius: 25px;
+    background-color:#DDD9D4;
+    border-style: none;
+    height: 50px;
+    margin-left: 100px;
+    padding-left: 20px;
+    font-size: 20px;
+}
+
+.viewEdit{
+    background:linear-gradient(to bottom, #92BD78, #8BB174);
+    border-radius: 25px;
+    position:relative;
+    margin-left: 71.5vw;
+    display: inline;
+    border-style: none;
+    padding-top: 7px;
+    padding-bottom: 7px;
+    padding-right: 12px;
+    padding-left: 12px;
+    font-weight: lighter;
+    color:#1E151B;
+}
