@@ -1,3 +1,4 @@
 module.exports = {
-    mongodb_url : ''
+    mongodb_url : '',
+    port: 8080
 };
