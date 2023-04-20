@@ -1,7 +1,7 @@
 const express    = require('express');
 const bodyParser = require('body-parser');
 const mongoose   = require('mongoose');
-const configKeys = require('./config');
+const config= require('./config');
 
 const app = express();
 
@@ -12,17 +12,18 @@ app.use(bodyParser.json());
 
 const mongodb_url = config.mongodb_url;
 const port        = config.port;
+mongoose.connect(mongodb_url);
 
 //===========AUTH API ENDPOINTS===========//
 app.post('/auth/register', async (req, res) => {
-    if (!req.username || !req.password || !req.email) res.status(403).send('Invalid Parameters.');
+    if (!req?.body?.username || !req?.body?.password || !req?.body?.email) res.status(403).send('Invalid Parameters.');
 
     const existing = await User.findOne({username: req.username});
     if (existing) res.status(403).send('Username already exists.');
 
     try {
-        const user = new User({username: req.username, email: req.email});
-        user.setPassword(req.password);
+        const user = new User({username: req.body.username, email: req.body.email});
+        user.setPassword(req.body.password);
         await user.save();
         const token = {user_id: user._id};
         res.status(200).send(JSON.stringify(token));
@@ -56,6 +57,10 @@ app.get('/auth/check', async (req, res) => {
     if (user) res.status(200).send(req.token);
 
     res.status(403).send('No User Authenticated');
+});
+
+app.listen(port, ()  => {
+
 });
 
 //===========CLIENT ROUTES===========//

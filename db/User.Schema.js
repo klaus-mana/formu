@@ -10,14 +10,17 @@ const userSchema = new Schema({
         required: true
     },
     email: String,
-    password: String,
+    password: {
+        type: String,
+        required: true
+    },
     salt: String,
     formulas: [String]
 });
 
-userSchema.methods.setPassword = (raw_pass) => {
+userSchema.methods.setPassword = function(raw_pass) {
     this.salt = crypto.randomBytes(16).toString('hex');
-    this.password = crypto.createHash('sha256').update(raw_pass + salt).digest('hex');
+    this.password = crypto.createHash('sha256').update(raw_pass + this.salt).digest('hex');
 };
 
 userSchema.methods.loginWith = (password) => {
