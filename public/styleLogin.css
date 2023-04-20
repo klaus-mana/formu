@@ -62,7 +62,7 @@ p{
     padding-left: 20px;
     padding-right: 20px;
     margin: 30px;
-    margin-bottom:0px;
+    margin-bottom: 0px;
     font-size: 18px;
     color:#FFFDFA
 }
@@ -83,10 +83,6 @@ input{
     margin-top: 30px
 }
 
-#emailEnter {
-    margin-left:55px
-}
-
 #signupDiv {
     background-color:#DDD9D4;
     width: 30vw;
@@ -95,7 +91,6 @@ input{
     border-radius: 25px;
     opacity: 75%
 }
-
 
 a{
     color:inherit;
@@ -110,3 +105,4 @@ p{
     margin: 5px;
     padding: 15px
 }
+

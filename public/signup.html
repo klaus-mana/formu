@@ -12,7 +12,7 @@
         <div id="content">
             <h2 id="contentTitle">Sign Up</h2>
             <div id="signupDiv">
-            <form action="createUser()">
+            <form onsubmit="createUser()">
                 <label for="userEnter">Username: </label>
                 <input type="text" id="userEnter">
                 <br>
@@ -24,6 +24,7 @@
                 <br>
                 <input type="submit" id="submitButton" value="Create Account">
             </form>
+            <a href="./login.html"><p>or login</p></a>
         </div>
         </div>
         <script src="./scriptSignup.js"></script>
