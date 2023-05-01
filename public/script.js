@@ -11,9 +11,14 @@ function get_all() {
 }
 
 function goToViewAll() {
-    window.location.replace("/dashboard-full.html");
+  window.location.replace("/dashboard-full.html");
 }
+function editFunction(calledFrom) {
+  console.log("YO");
+  var eqn = document.getElementById("equation");
+  console.log(eqn);
 
+}
 /*
 function edit_clicked(calledFrom) {
     calledFrom.parentElement.classList.toggle("active");

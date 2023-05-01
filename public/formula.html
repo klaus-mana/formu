@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+        <script type="text/javascript" id="MathJax-script" async
+                src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+        <script src="./script.js"></script>
         <meta charset="utf-8">
         <title>Formula</title>
         <link id="cssFile" rel="stylesheet" type="text/css" href="styleFormula.css">
@@ -10,10 +14,16 @@
             <h2 id="mainTitle">Formula</h2>
         </div>
         <div id="content">
+            <h3 id="formName">formula name</h3>
             <div id="formDiv">
-                <h3 id="formName">formula name</h3>
-                <input type="text" id="formula">
-                <button onclick="share()" id="shareButton">Share</button>
+                <span class = "mathSpan">
+                    <p class="math" id="equation">\(E=mc^2\)</p>
+                </span>
+                <!--<input type="text" id="formula">-->
+                <div id="buttonsDiv">
+                    <button id="editButton" onclick="editFunction(this)">Edit</button>
+                    <button onclick="shareThing();" id="shareButton">Share</button>
+                </div>
             </div>
             <div id="useDiv">
                 <h3 id="useTitle">Use Formula</h3>
