@@ -117,7 +117,6 @@ hr{
 #FFAC9F*/
 #viewAll {
     color:#1E151B;
-    background:linear-gradient(to bottom, #FFAC9F, #FF8370);
     position:fixed;
     bottom: 50px;
     left:40vw;
@@ -128,12 +127,14 @@ hr{
     align-self:center;
     text-align:center;
     width: 20vw;
-    border-radius:25px;
     height:40px
+}
+#viewAll:hover {
+    color:#FF8370;
 }
 /*#8BB174*/
 .viewEdit{
-    background:linear-gradient(to bottom, #92BD78, #8BB174);
+    background-color:#8BB174;
     border-radius: 25px;
     position:relative;
     margin-left: 71.5vw;
@@ -162,6 +163,7 @@ a:hover {
     padding: 20px;
     font-weight:100;
 }
+
 
 
 

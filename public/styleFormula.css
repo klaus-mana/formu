@@ -1,0 +1,97 @@
+html, body{
+    margin:0;
+    font-family:'Gill Sans';
+    background-color: #FFFDFA
+}
+
+#topSection {
+    background-image: linear-gradient(to right, #FF8370, #1E151B);
+    position:fixed;
+    top:0;
+    width:100vw;
+    font-weight:lighter;
+    padding-top: 17px;
+    padding-bottom:17px;
+    height:2.5em;
+    text-align:center
+}
+
+h2{
+    font-size:32px
+}   
+
+h3{
+    font-size:20px
+}
+#content {
+    margin-top: 100px;
+    font-family: "Helvetica";
+    font-weight:lighter;
+    width: 100vw;
+    background-color:#FFFDFA;
+    color:#1E151B
+}
+#mainTitle{
+    display:inline;
+    color:#FFFDFA;
+    padding: 20px;
+    font-weight:100;
+    text-align:center;
+    margin:auto
+}
+
+#formName {
+    color:#426B69;
+    font-size:24px;
+    margin-left:-40px;
+    padding:15px;
+}
+
+#formula {
+    align-self:center;
+    background-color:#DDD9D4;
+    border-style:none;
+    border-radius:25px;
+    width: 50vw;
+    font-size: 22px;
+    padding:15px;
+    color:#1E151B;
+    font-family: "Helvetica";
+}
+
+#formDiv, #useDiv{
+    margin-left:20vw;
+}
+
+#shareButton{
+    background-color:#8BB174;
+    border-radius: 25px;
+    position:relative;
+    display: inline;
+    border-style: none;
+    padding-top: 7px;
+    padding-bottom: 7px;
+    padding-right: 12px;
+    padding-left: 12px;
+    font-weight: lighter;
+    margin-left:5.5vw;
+    color:#1E151B;
+}
+
+#shareButton:hover{
+    color:#FFFDFA
+}
+
+#useTitle {
+    font-weight:lighter;
+    margin-left: -20px;
+    font-size: 20px;
+    padding-top:15px;
+    padding-bottom:0px;
+    color:#1E151B;
+    margin-bottom:0px
+}
+
+p, #simpleInput, #csvFile{
+    margin-left:10px;
+}
