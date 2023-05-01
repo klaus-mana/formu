@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Dashboard</title>
+        <link id="cssFile" rel="stylesheet" type="text/css" href="styleFull.css">
+    </head>
+    <body>
+        <div id="topSection">
+            <div id="leftSideTop"></div>
+                <h2 id="dashTitle"><a href="./dashboard.html">Dashboard</a></h2>
+                <h3 class="topOptions"><a href="./explore.html">Explore</a></h3>
+                <h3 class="topOptions"><a href="./help.html">Help</a></h3>
+            </div>
+            <div id="rightSideTop" >
+                <h2 id="profileOption">My Profile</h2>
+            </div>
+        </div>
+        <div id="tagsDiv">
+            <h3 id="tagsTitle">My Tags</h3>
+            <h4 class="tags"><a onclick="getTagged(tag1)">tag1</a></h4>
+        </div>
+        <div id="content">
+            <h3 id="allTitle">All Functions</h3>
+            <div class="function">
+                <h4 class="formName">formula name</h4>
+                <input type="text" class="formula" value="formula here" onclick="edit_clicked(this)"></input>
+                <button class="viewEdit" onclick="edit_clicked(this);">View/Edit</button>
+                <hr>
+
+            </div>
+            <div class="function">
+                <h4 class="formName">formula name</h4>
+                <input type="text" class="formula" value="formula here" onclick="edit_clicked(this)"></input>
+                <button class="viewEdit" onclick="edit_clicked(this)">View/Edit</button>
+                <hr>
+            </div>
+            <div class="function">
+                <h4 class="formName">formula name</h4>
+                <input type="text" class="formula" value="formula here" onclick="edit_clicked(this)"></input>
+                <button class="viewEdit" onclick="edit_clicked(this)">View/Edit</button>
+                <hr>
+                <!--
+                <div class="toggleView">
+                    <a class="collapse actions" id="useFunc" onclick="input_data(this)">Use</a>
+                    <a class="collapse actions" id="shareFunc" onclick="share(this)">Share</a>
+                </div>
+                -->
+            </div>
+        </div>
+        <script src="./script.js"></script>
+    </body>
+</html>

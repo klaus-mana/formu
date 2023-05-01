@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Formula</title>
+        <link id="cssFile" rel="stylesheet" type="text/css" href="styleFormula.css">
+    </head>
+    <body>
+        <div id="topSection">
+            <h2 id="mainTitle">Formula</h2>
+        </div>
+        <div id="content">
+            <div id="formDiv">
+                <h3 id="formName">formula name</h3>
+                <input type="text" id="formula">
+                <button onclick="share()" id="shareButton">Share</button>
+            </div>
+            <div id="useDiv">
+                <h3 id="useTitle">Use Formula</h3>
+                <h4 id="simpleTitle">Simple Input</h4>
+                <p>Simple input runs your function for one value per variable. Define the variables as comma separated
+                    values here:
+                </p>
+                <input type="text" id="simpleInput" placeholder="x=1, y=2,..."/>
+                <br>
+                <br>
+                <h4 id="complexTitle">Dataset Input</h4>
+                <p>Run your entire dataset here! Be sure to format the first line of your file to let us know
+                    which variables are which, i.e. x, y, z.
+                </p>
+                <input type="file" id="csvFile" accept=".csv" /><p>(file must be .csv)</p>
+            </div>
+        </div>
+    </body>
+</html>
