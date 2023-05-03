@@ -94,7 +94,7 @@ app.patch('/user/:id/save', async (req, res) => {
 
     try {
         const user = await User.findOne({_id: req.params.id});
-        user.formulas.append(req.body.form_id);
+        user.formulas.push(req.body.form_id);
         await user.save();
         res.status(203).send();
     } catch (e) {

@@ -27,6 +27,14 @@ function load_lib() {
   s.parentNode.insertBefore(script, s);
 };
 
+async function getDict() {
+  console.log("ayo");
+  var response = await(await fetch(`/user/${userId}/formulas`, {
+    method:"GET"
+  })).json();
+  console.log(response);
+  return response;
+}
 
 function showDict(latexDict) {
     //temporary
@@ -76,8 +84,16 @@ async function createNewFunction() {
     method:"POST",
     headers: {"Content-Type": "application/json"},
     body: JSON.stringify(reqBody)
-})).json();
-console.log(response);
+  })).json();
+  console.log(response);
+  var req2 = {
+    form_id : response._id
+  }
+  var response2 = await fetch(`/user/${userId}/save`, {
+    method : "PATCH",
+    headers:{"Content-Type": "application/json"},
+    body:JSON.stringify(req2)
+  });
   window.location.replace("/formula.html" + `?id=${response._id}`);
 }
 
@@ -92,11 +108,6 @@ window.onload = function () {
       "id11" : ["latexx", "title-full", "tag"],
       "id2" : ["\\(2e^2\\)", "e^2", "e"],
     };
-    showDict(showFunctions);
-    document.getElementById("addNew").addEventListener('click', event => {
-    console.log("event");
-    //createNewFunction();
-    });
   } else if(window.location.pathname == "/dashboard.html") {
     console.log("HERE");
     //showFunctions = getAllRecents();
@@ -105,12 +116,6 @@ window.onload = function () {
       "idkk" : ["\\(2e^2\\)", "e^2", "e"],
       "whatever" : ["\\(2^x\\)", "2 x squared", "math"]
     };
-
-    showDict(showFunctions);
-    document.getElementById("addNew").addEventListener('click', event => {
-    console.log("event");
-    createNewFunction();
-    });
   } else if(window.location.pathname == "/explore.html") {
     showFunctions = {
       "exploreid1" : ["\\(\\frac{2}{x}\\)", "cool fraction", "lame tag"],
@@ -122,6 +127,11 @@ window.onload = function () {
       "exploreid14" : ["\\(\\frac{15}{x}\\)", "cool fraction 14", "lame tag 14"]
     }
   }
+  showDict(getDict());
+    document.getElementById("addNew").addEventListener('click', event => {
+    console.log("event");
+    createNewFunction();
+  });
 };
 
 
