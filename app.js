@@ -3,8 +3,19 @@ const bodyParser = require('body-parser');
 const mongoose   = require('mongoose');
 const config     = require('./config');
 const utils      = require('./utils');
+const multer     = require('multer');
 
 const app = express();
+
+const multerStorage = multer.diskStorage({
+    destination: function(req, file, cb) {
+      cb(null, './csv_files');
+    },
+    filename: function(req, file, cb) {
+      cb(null, `${req.body.user_id}-${file.originalname}`);
+    }
+  });
+const upload = multer({ storage: multerStorage });
 
 const User = require('./db/User.Schema');
 const Formula = require('./db/Formula.Schema');
@@ -212,7 +223,7 @@ app.delete('/formula/:id/delete', async (req, res) => {
     }
 });
 
-app.get('/formula/:id/run/simple', async (req, res) => {
+app.post('/formula/:id/run/simple', async (req, res) => {
     try {
         const formula = await Formula.findOne({_id: req.params.id});
         const runnable = utils.getRunnable(formula.raw_latex);
@@ -224,6 +235,20 @@ app.get('/formula/:id/run/simple', async (req, res) => {
     }
 });
 
-app.listen(port, ()  => {
+app.post('/formula/:id/run/file', upload.single('file'), async (req, res) => {
+   const formula = await Formula.findOne({id: req.params.id});
+   const vars = await utils.getInput(req.file.filename);
+   const outfile = await utils.getOutput(formula.raw_latex, vars, req.file.filename);
+
+   res.download(outfile, (e) => {
+    if (e) {
+        console.log(`\n💥 Server Error in /formula/${req.params.id}/run/file: ${e}\n`);
+    } else {
+        utils.cleanup(req.file.filename);
+    }
+   });
+});
+
+app.listen(port, async ()  => {
     console.log(`🟢 Listening on ${port}`);
 });
