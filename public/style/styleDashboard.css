@@ -1,17 +1,4 @@
-#tagsDiv{
-    position:fixed;
-    left:0;
-    top:74px;
-    padding: 10px;
-    background-color:#DDD9D4;
-    height: 100%;
-    margin-top:0;
-    padding-top:0;
-    width:240px;
-    font-family: 'Space Mono', monospace;
-    font-style:italic;
-}
-
+/*Gill sans*/
 html, body{
     margin:0;
     font-family:'Space Grotesk', sans-serif;
@@ -71,88 +58,55 @@ h3{
 
 #content {
     padding-right: 50px;
-    padding-left: 220px;
+    padding-left: 80px;
     margin-top: 100px;
-    font-family: "Space Mono", "monospace";
-    font-weight:lighter;
-    width: 90vw;
-    margin-left:100px
+    font-family: 'Space Mono', monospace;
+    font-weight:700;
+    width: 90vw
 }
 
-#allTitle {
-    font-weight:lighter;
-    margin-left: 40px;
+#recents {
+    font-weight:100;
+    margin-left: -20px;
     font-size: 25px;
     padding-top:15px;
     padding-bottom:0px;
     color:#1E151B;
     margin-bottom:0px;
-    font-family: "Space Grotesk", "serif";
-}
-
-#tagsTitle {
-    font-weight:lighter;
-    font-size: 20px;
-    color:#1E151B;
-    padding-top:10px;
-    padding-left:10px;
-    color:#426B69;
-    font-style: normal;
     font-family:'Space Grotesk', sans-serif;
 }
+
 .function{
-    margin-left: 65px;
-    padding-top:25px;
-    padding-bottom:45px;
-    height:auto;
+    margin-left: 25px;
+    /*padding-top:15px;*/
+    padding-bottom:35px;
+    padding-top: 40px
 }
-.viewEdit:active {
-    color:#FFFDFA;
-}
-/*.function:active, .active{
-    #height:300px;
-}*/
 
-
-.tags{
-    font-size:18px;
-    font-weight: lighter;
-    margin-top:5px;
-    margin-bottom:5px;
-    font:'Gill Sans';
-    padding-left:20px;
-    color:#1E151B
-}
 .formName {
     color:#426B69;
-    padding-bottom:5px;
-    margin-bottom:10px;
-    font-size:18px;
+    font-size:22px;
     font-weight: 900;
-    margin-top:30px;
+    margin-top: 50px;
     display:inline;
-    font-family:'Space Mono', monospace;
 }
 .formula {
-    margin-left:30px;
-    margin-top:60px;
-    margin-bottom: 60px;
+    margin-left:15px;
+    margin-top:15px;
+    margin-bottom: 20px;
     color:#8B878A;
-    font-size: 22px;
-    width: 52vw;
+    font-size: 24px;
+    width: 50vw;
     display:inline;
-    border-style:none;
-    padding:5px;
-    font-weight:lighter;
-    padding-top:70px;
-    padding-bottom:70px
+    padding-top:100px;
+    padding-bottom:10px
 }
 
 hr{
     color:#426B69;
     position:absolute;
     background-color:#426B69;
-    width: 58vw;
+    width: 80vw;
     align-self:center;
     height:4px;
     margin-left: 3.5vw;
@@ -162,21 +116,39 @@ hr{
     text-align:center;
 }
 /*#F8A497
+#FFAC9F*/
+#viewAll {
+    color:#1E151B;
+    position:fixed;
+    bottom: 50px;
+    left:40vw;
+    font-size: 22px;
+    border-style:none;
+    font-family:'Space Grotesk', sans-serif;
+    font-weight: lighter;
+    align-self:center;
+    text-align:center;
+    width: 20vw;
+    height:40px
+}
+#viewAll:hover {
+    color:#FF8370;
+}
 /*#8BB174*/
 .viewEdit{
     background-color:#8BB174;
+    border-radius: 17px;
     position:relative;
+    margin-left: 81.5vw;
     display: inline;
+    width: 90px;
     border-style: none;
     padding-top: 7px;
     padding-bottom: 7px;
     padding-right: 12px;
     padding-left: 12px;
     font-weight: lighter;
-    margin-left:60vw;
-    width:90px;
     color:#1E151B;
-    border-radius: 17px;
     font-family:'Space Mono', monospace;
     text-align:center;
 }
@@ -187,7 +159,8 @@ a{
 }
 a:hover { 
     text-decoration: none; 
-    color:#8BB174
+    color:#8BB174;
+    cursor:pointer;
 }
 
 #dashTitle {
@@ -195,43 +168,6 @@ a:hover {
     color:#FF8370;
     padding: 20px;
     font-weight:100;
-}
-/*
-.collapse.actions:after {
-    content: '';
-    position: absolute;
-    width: 100%;
-    transform: scaleX(0);
-    height: 2px;
-    bottom: 0;
-    left: 0;
-    margin-top:15px;
-    background-color: #8B878A;
-    transform-origin: bottom right;
-    transition: transform 0.25s ease-out;
-  }
-
-.collapse.actions:hover:after {
-    transform: scaleX(1);
-    transform-origin: bottom left;
-}*/
-
-.toggleView, .collapse {
-    overflow:hidden;
-    transition: max-height 0.2s ease-out;
-    max-height:0;
-    display:block;
-    margin-top: 35px;
-}
-.collapse {
-    overflow:hidden;
-    transition: max-height 0.2s ease-out;
-    max-height:0;
-    display:inline;
-}
-.collapse:active {
-    display:inline-block;
-    overflow:show;
 }
 
 .mathSpan{
@@ -266,5 +202,20 @@ a:hover {
 
 .viewEdit:hover{
     color:#FFFDFA;
+    cursor:pointer;
+}
+
+#addNew {
+    position:fixed;
+    right: 15px;
+    bottom:15px;
+    background-color:#8BB174;
+    color:#FFFDFA;
+    border-radius:25px;
+    font-size:50px
+}
+
+#addNew:hover{
+    color:#1E151B;
     cursor:pointer;
 }

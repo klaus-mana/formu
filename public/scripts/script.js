@@ -3,7 +3,7 @@ var active_div = null;
 var active_div_orig = null;
 var active_button = null;
 var formula_contents = null;
-
+var userId = "64521db0f1028b25ce6aa424";
 
 window.MathJax = {
   tex2jax: {
@@ -18,9 +18,10 @@ function load_lib() {
   var script = document.createElement('script');
   script.type = 'text/javascript';
   script.async = true;
+  /*
   script.onload = function () {
     MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
-  };
+  };*/
   script.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML';
   var s = document.getElementsByTagName('script')[0];
   s.parentNode.insertBefore(script, s);
@@ -31,7 +32,7 @@ function showDict(latexDict) {
     //temporary
     var contentDiv = document.getElementById("content");
     formula_contents = latexDict;
-    console.log(latexDict);
+    /*console.log(latexDict);*/
     for (var fn of Object.keys(latexDict)) {
       var current = latexDict[fn]
       var thisDiv = document.createElement("div")
@@ -49,7 +50,8 @@ function showDict(latexDict) {
                 <hr>
       </div>
       `;
-      console.log(newElement);
+      /*
+      console.log(newElement);*/
       contentDiv.innerHTML = contentDiv.innerHTML + newElement;
       var buttonElement = document.getElementById(`button_${fn}`)
       MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
@@ -64,9 +66,25 @@ function showDict(latexDict) {
 
 }
 
-window.addEventListener("load", () => {
-  load_lib();
-  console.log(window.location);
+async function createNewFunction() {
+  console.log("Creating new function");
+  var reqBody = {
+      user_id: userId,
+      raw_latex: "\\( \\)"
+  }
+  var response = await(await fetch("/formula/create", {
+    method:"POST",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify(reqBody)
+})).json();
+console.log(response);
+  window.location.replace("/formula.html" + `?id=${response._id}`);
+}
+
+window.onload = function () {
+  MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+  //load_lib();
+  /*console.log(window.location);*/
   var showFunctions = {}
   if(window.location.pathname == "/dashboard-full.html") {
     //showFunctions = getAllUser();
@@ -74,13 +92,25 @@ window.addEventListener("load", () => {
       "id11" : ["latexx", "title-full", "tag"],
       "id2" : ["\\(2e^2\\)", "e^2", "e"],
     };
+    showDict(showFunctions);
+    document.getElementById("addNew").addEventListener('click', event => {
+    console.log("event");
+    //createNewFunction();
+    });
   } else if(window.location.pathname == "/dashboard.html") {
+    console.log("HERE");
     //showFunctions = getAllRecents();
     showFunctions = {
       "abc" : ["latexx", "title-norm", "tagged"],
       "idkk" : ["\\(2e^2\\)", "e^2", "e"],
       "whatever" : ["\\(2^x\\)", "2 x squared", "math"]
     };
+
+    showDict(showFunctions);
+    document.getElementById("addNew").addEventListener('click', event => {
+    console.log("event");
+    createNewFunction();
+    });
   } else if(window.location.pathname == "/explore.html") {
     showFunctions = {
       "exploreid1" : ["\\(\\frac{2}{x}\\)", "cool fraction", "lame tag"],
@@ -92,8 +122,8 @@ window.addEventListener("load", () => {
       "exploreid14" : ["\\(\\frac{15}{x}\\)", "cool fraction 14", "lame tag 14"]
     }
   }
-  showDict(showFunctions);
-});
+};
+
 
 
 /*
@@ -146,24 +176,3 @@ function editFunction(calledFrom) {
 function updateEqn(id, newVal) {
   console.log(`Need to implement, trying to update ${id} with a value of ${newVal}`)
 }
-/*
-function edit_clicked(calledFrom) {
-    calledFrom.parentElement.classList.toggle("active");
-    var collapseDiv = calledFrom.nextElementSibling.nextElementSibling;
-    console.log(collapseDiv);
-    if (collapseDiv.style.maxHeight) {
-        collapseDiv.style.maxHeight = null;
-      } else {
-        collapseDiv.style.maxHeight= collapseDiv.scrollHeight + "px";
-      }
-    var allCollapse = collapseDiv.children;
-    for(var i=0; i < allCollapse.length; i++) {
-        console.log(allCollapse[i]);
-        allCollapse[i].classList.toggle("active");
-        if (allCollapse[i].style.maxHeight) {
-            allCollapse[i].style.maxHeight = null;
-          } else {
-            allCollapse[i].style.maxHeight= allCollapse[i].scrollHeight + "px";
-          }
-    }
-}*/

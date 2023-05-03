@@ -1,20 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300&family=Space+Mono:ital@0;1&display=swap" rel="stylesheet">
+        <link id="cssFile" rel="stylesheet" type="text/css" href="./style/styleFormula.css">
         <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
         <script type="text/javascript" id="MathJax-script" async
                 src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
         <script src="./scripts/scriptFormula.js"></script>
         <meta charset="utf-8">
         <title>Formula</title>
-        <link id="cssFile" rel="stylesheet" type="text/css" href="styleFormula.css">
     </head>
     <body>
         <div id="topSection">
             <h2 id="mainTitle">Formula</h2>
         </div>
         <div id="content">
-            <h3 id="formName"></h3>
+            <div id="titleDiv">
+                <input type="text" id="formName"></input>
+                <p id="formTag"></p>
+                <input placeholder="Add tag..." id="tagAdder"/>
+            </div>
             <div id="formDiv">
                 <span id="formula" class = "mathSpan">
                     <p class="math" id="equation"></p>
@@ -22,6 +29,7 @@
                 <!--<input type="text" id="formula">-->
                 <div id="buttonsDiv">
                     <button id="editButton">Edit</button>
+                    <button id="submitButton">Submit</button>
                     <button id="shareButton">Share</button>
                 </div>
             </div>
@@ -31,7 +39,7 @@
                 <p>Simple input runs your function for one value per variable. Define the variables as comma separated
                     values here:
                 </p>
-                <input type="text" id="simpleInput" placeholder="x=1, y=2,..."/> <button id="runButton">Run</button>
+                <input type="text" id="simpleInput" placeholder="x=1, y=2,..."/> <button id="runButton">Run!</button>
                 <br>
                 <br>
                 <h4 id="complexTitle">Dataset Input</h4>
