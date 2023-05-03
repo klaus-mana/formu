@@ -5,7 +5,7 @@ var active_button = null;
 var formula_contents = null;
 var eqnLatex = "";
 var fnID = "";
-var userId = "6452ad4081ca31753412925d";
+var userId = "";
 
 window.MathJax = {
   tex2jax: {
@@ -16,7 +16,16 @@ window.MathJax = {
  
 
 window.onload = load_lib();
-function load_lib() {
+async function load_lib() {
+  // ==== CHECK USER AUTH === //
+  const authResponse = await (await fetch('/auth/check')).text();
+  if (authResponse == 'EXPIRED') {
+      window.location.href = '/login.html';
+  }
+  console.log(authResponse);
+  userId = authResponse;
+  // === END CHECK USER AUTH === //
+
   var script = document.createElement('script');
   script.type = 'text/javascript';
   script.async = true;

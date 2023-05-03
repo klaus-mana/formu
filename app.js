@@ -99,6 +99,8 @@ app.get('/user/:id', async (req, res) => {
 });
 
 app.get('/user/:id/formulas', async (req, res) => {
+    if (req.params.id == "EXPIRED") return;
+
     try {
         const user = await User.findOne({_id: req.params.id});
         const formulas = [];
@@ -242,7 +244,8 @@ app.post('/formula/:id/run/simple', async (req, res) => {
         const formula = await Formula.findOne({_id: req.params.id});
         const start_problem = formula.raw_latex.indexOf("(");
         const end_problem = formula.raw_latex.length - 2;
-        const run_eqn = formula.raw_latex.substring(start_problem+1, end_problem);
+        const run_eqn = formula.raw_latex.substring(start_problem+1, end_problem).trim();
+        console.log(run_eqn);
         const runnable = utils.getRunnable(run_eqn); //Lexer whatever is here, fixed with above string formatting
         const result = runnable(req.body);//now getting: mc not numbers here, this was due to not having *
         res.status(200).send(JSON.stringify(result));
