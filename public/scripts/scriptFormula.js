@@ -110,13 +110,15 @@ async function displayFunction() {
   });
   document.getElementById("tagAdder").addEventListener("keypress", async function (e) {
     if(e.keyCode == 13) {
-      var newTag = document.getElementById("tagAdder").value;
       var oldTags = response.tags;
+    var newTag = document.getElementById("tagAdder").value;
+    if(newTag.length > 0) {
       oldTags.push(newTag);
       var r = await submitChanges({tags:oldTags});
       document.getElementById("formTag").innerHTML =`#${oldTags}`;
       console.log(r);
     }
+  }
   });
   document.getElementById("describe").addEventListener("keypress", async function (e) {
     if(e.keyCode == 13) {
@@ -132,9 +134,11 @@ async function displayFunction() {
     var newInput = document.getElementById(`in_${fnID}`);
     console.log(document.getElementById(`in_${fnID}`));
     var newEqn = newInput.value;
-    var newTag = document.getElementById("tagAdder").value;
     var oldTags = response.tags;
-    oldTags.push(newTag);
+    var newTag = document.getElementById("tagAdder").value;
+    if(newTag.length > 0) {
+      oldTags.push(newTag);
+    }
     var allChanges = {
       raw_latex:newEqn, 
       name: document.getElementById("formName").value,
