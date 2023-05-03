@@ -1,6 +1,7 @@
+/*Gill sans*/
 html, body{
     margin:0;
-    font-family:'Gill Sans';
+    font-family:'Space Grotesk', sans-serif;
     background-color: #FFFDFA
 }
 
@@ -57,43 +58,44 @@ h3{
 
 #content {
     padding-right: 50px;
-    padding-left: 50px;
+    padding-left: 80px;
     margin-top: 100px;
-    font-family: "Helvetica";
-    font-weight:lighter;
+    font-family: 'Space Mono', monospace;
+    font-weight:700;
     width: 90vw
 }
 
 #recents {
-    font-weight:lighter;
-    margin-left: 20px;
+    font-weight:100;
+    margin-left: -20px;
     font-size: 25px;
     padding-top:15px;
     padding-bottom:0px;
     color:#1E151B;
-    margin-bottom:0px
+    margin-bottom:0px;
+    font-family:'Space Grotesk', sans-serif;
 }
 
-.recentFunction{
-    margin-left: 45px;
-    padding-top:15px;
-    padding-bottom:15px
+.function{
+    margin-left: 25px;
+    /*padding-top:15px;*/
+    padding-bottom:35px;
+    padding-top: 40px
 }
 
 .formName {
     color:#426B69;
-    padding-bottom:5px;
-    margin-bottom:10px;
-    font-size:18px;
+    font-size:22px;
     font-weight: 900;
-    margin-top:30px
+    margin-top: 50px;
+    display:inline;
 }
 .formula {
     margin-left:15px;
     margin-top:15px;
     margin-bottom: 20px;
     color:#8B878A;
-    font-size: 22px;
+    font-size: 24px;
     width: 50vw;
     display:inline;
     padding-top:100px;
@@ -122,7 +124,7 @@ hr{
     left:40vw;
     font-size: 22px;
     border-style:none;
-    font-family:"Helvetica";
+    font-family:'Space Grotesk', sans-serif;
     font-weight: lighter;
     align-self:center;
     text-align:center;
@@ -135,10 +137,11 @@ hr{
 /*#8BB174*/
 .viewEdit{
     background-color:#8BB174;
-    border-radius: 25px;
+    border-radius: 17px;
     position:relative;
-    margin-left: 71.5vw;
+    margin-left: 81.5vw;
     display: inline;
+    width: 90px;
     border-style: none;
     padding-top: 7px;
     padding-bottom: 7px;
@@ -146,6 +149,8 @@ hr{
     padding-left: 12px;
     font-weight: lighter;
     color:#1E151B;
+    font-family:'Space Mono', monospace;
+    text-align:center;
 }
 
 a{
@@ -154,7 +159,8 @@ a{
 }
 a:hover { 
     text-decoration: none; 
-    color:#8BB174
+    color:#8BB174;
+    cursor:pointer;
 }
 
 #dashTitle {
@@ -164,6 +170,37 @@ a:hover {
     font-weight:100;
 }
 
+.mathSpan{
+    max-width:50vw;
+    display:inline;
+    margin-left:75px;
+    position:absolute;
+}
 
+.math{
+    padding:0;
+    margin:0;
+    margin-top:10px;
+    margin-left:-30px;
+    color:#8B878A;
+    font-size:20px
+}
+.tag {
+    font-size: 16px;
+    color:#8B878A;
+    display: inline;
+    margin-left: 10px;
+    font-family:'Space Mono', monospace;
+    font-style: italic
+}
+.titleWrap {
+    display:inline;
+    padding-bottom:25px;
+    margin-bottom:25px;
+    margin-top: 70px;
+}
 
-
+.viewEdit:hover{
+    color:#FFFDFA;
+    cursor:pointer;
+}
