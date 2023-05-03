@@ -37,6 +37,7 @@ app.post('/auth/login', async (req, res) => {
     if (!req.body.username || !req.body.password) res.status(403).send('Invalid Parameters.');
 
     try {
+        console.log(req.body.username);
         const user = await User.findOne({username: req.body.username});
         if (!user) res.status(403).send('Username and/or Password Incorrect.');
         const correctPass = user.loginWith(req.body.password);

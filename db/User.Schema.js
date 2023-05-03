@@ -24,7 +24,7 @@ userSchema.methods.setPassword = function(raw_pass) {
     this.password = crypto.createHash('sha256').update(raw_pass + this.salt).digest('hex');
 };
 
-userSchema.methods.loginWith = (password) => {
+userSchema.methods.loginWith = function(password)  {
     const pass = crypto.createHash('sha256').update(password + this.salt).digest('hex');
     return this.password == pass;
 }
