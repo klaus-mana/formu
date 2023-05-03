@@ -38,8 +38,32 @@ window.addEventListener("load", () => {
   document.getElementById("deleteButton").addEventListener("click", () => {
     deleteFunction();
   });
+  document.getElementById("runButton").addEventListener("click", () => {
+    useSimple();
+  })
   
 });
+
+
+async function useSimple() {
+  var input = document.getElementById("simpleInput").value;
+  var reqBody ={};
+  for(var x of input.split(",")){
+    x=x.trim();
+    var fullX = x.split("=");
+    var varName = fullX[0].trim();
+    var varVal = fullX[1].trim();
+    reqBody[varName] = parseFloat(varVal);
+    console.log(`Run ${varName} = ${varVal}`);
+  }
+  console.log(reqBody);
+  var response = await (await fetch(`/formula/${fnID}/run/simple`, {
+    method:"POST",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify(reqBody)
+  })).text();
+  console.log(await response);
+}
 
 async function deleteFunction() {
   var reqBody= {
@@ -58,6 +82,7 @@ async function deleteFunction() {
   window.location.replace("/dashboard-full.html");
   console.log(response);
 }
+
 async function displayFunction() {
   const queryString = window.location.search;
   var urlSearch = new URLSearchParams(queryString);

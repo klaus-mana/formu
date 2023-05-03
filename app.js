@@ -228,8 +228,11 @@ app.delete('/formula/:id/delete', async (req, res) => {
 app.post('/formula/:id/run/simple', async (req, res) => {
     try {
         const formula = await Formula.findOne({_id: req.params.id});
-        const runnable = utils.getRunnable(formula.raw_latex);
-        const result = runnable(req.body);
+        const start_problem = formula.raw_latex.indexOf("(");
+        const end_problem = formula.raw_latex.length - 2;
+        const run_eqn = formula.raw_latex.substring(start_problem+1, end_problem);
+        const runnable = utils.getRunnable(run_eqn); //Lexer whatever is here, fixed with above string formatting
+        const result = runnable(req.body);//now getting: mc not numbers here, this was due to not having *
         res.status(200).send(JSON.stringify(result));
     } catch (e) {
         console.log(`\n💥 Server Error in /formula/${req.params.id}/run/simple: ${e}\n`);
