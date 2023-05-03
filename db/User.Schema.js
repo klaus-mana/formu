@@ -16,7 +16,6 @@ const userSchema = new Schema({
     },
     salt: String,
     formulas: [String],
-    saved:    [String]
 });
 
 userSchema.methods.setPassword = function(raw_pass) {
