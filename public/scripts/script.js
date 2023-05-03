@@ -3,7 +3,7 @@ var active_div = null;
 var active_div_orig = null;
 var active_button = null;
 var formula_contents = null;
-var userId = "64521db0f1028b25ce6aa424";
+var userId = "6452ad4081ca31753412925d";
 
 window.MathJax = {
   tex2jax: {
@@ -34,7 +34,9 @@ async function getDict(keyword="full") {
       method:"GET"
     })).json();
     for(var formula of response) {
-      retDict[`${formula._id}`] = [`${formula.raw_latex}`, `${formula.name}`, `${formula.tags}`];
+      if(formula != null) {
+        retDict[`${formula._id}`] = [`${formula.raw_latex}`, `${formula.name}`, `${formula.tags}`];
+      }
     }
     return retDict;
   } else {
@@ -44,11 +46,15 @@ async function getDict(keyword="full") {
       method:"GET"
     })).json();
     for(var formula of response) {
-      retDict[`${formula._id}`] = [`${formula.raw_latex}`, `${formula.name}`, `${formula.tags}`];
-      i++;
-      if(i>2) {
-        return retDict;
+      if(formula != null) {
+        retDict[`${formula._id}`] = [`${formula.raw_latex}`, `${formula.name}`, `${formula.tags}`];
+        console.log(retDict[`${formula._id}`]);
+        i+=1;
+        if(i>2) {
+          return retDict;
+        }
       }
+      return retDict;
     }
   }
 }
@@ -59,29 +65,32 @@ function showDict(latexDict) {
     var contentDiv = document.getElementById("content");
     formula_contents = latexDict;
     /*console.log(latexDict);*/
+    console.log(latexDict);
     for (var fn of Object.keys(latexDict)) {
-      console.log(fn);
-      var current = latexDict[fn];
-      var thisDiv = document.createElement("div");
-      thisDiv.setAttribute("class", "function");
-      var newElement = 
-      `
-      <div class="function" id="div_${fn}">
-                <div class="titleWrapper">
-                  <p class="formName">${current[1]}</p><p class="tag">#${current[2]}</p>
-                </div>
-                <span class="mathSpan">
-                    <p class="math" id="math_${fn}">${current[0]}</p>
-                </span>
-                <button class="viewEdit" id="${fn}">Edit/Use</button>
-                <hr>
-      </div>
-      `;
-      /*
-      console.log(newElement);*/
-      contentDiv.innerHTML = contentDiv.innerHTML + newElement;
-      //var buttonElement = document.getElementById(`${fn}`)
-      MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+      if(fn != null) {
+        console.log(fn);
+        var current = latexDict[fn];
+        var thisDiv = document.createElement("div");
+        thisDiv.setAttribute("class", "function");
+        var newElement = 
+        `
+        <div class="function" id="div_${fn}">
+                  <div class="titleWrapper">
+                    <p class="formName">${current[1]}</p><p class="tag">#${current[2]}</p>
+                  </div>
+                  <span class="mathSpan">
+                      <p class="math" id="math_${fn}">${current[0]}</p>
+                  </span>
+                  <button class="viewEdit" id="${fn}">Edit/Use</button>
+                  <hr>
+        </div>
+        `;
+        /*
+        console.log(newElement);*/
+        contentDiv.innerHTML = contentDiv.innerHTML + newElement;
+        //var buttonElement = document.getElementById(`${fn}`)
+        MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+      }
     }
      var buttons = document.getElementsByClassName("viewEdit");
      for (const b of buttons) {

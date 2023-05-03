@@ -1,10 +1,10 @@
 html, body{
     margin:0;
-    font-family:'Gill Sans';
+    font-family:"Space Grotesk", "serif";
     background-color: #FFFDFA
 }
 
-#topSection {
+#topSectionSignup {
     background-image: linear-gradient(to right, #FF8370, #1E151B);
     position:fixed;
     top:0;
@@ -72,10 +72,12 @@ p{
 }
 
 label{
+    display:inline;
     margin-left: 20px;
     margin-top: 20px;
     font-size: 16px;
     color:#1E151B;
+    font-weight: 900
 }
 
 input{
@@ -93,7 +95,8 @@ input{
     margin-left: 35vw;
     margin-top: 20px;
     border-radius: 25px;
-    opacity: 75%
+    opacity: 75%;
+    padding-top: 20px;
 }
 
 
@@ -108,5 +111,28 @@ a:hover {
 
 p{
     margin: 5px;
-    padding: 15px
+    padding: 15px;
+    text-align: center;
+}
+
+#details {
+    display:inline;
+    margin-left: 0vw;
+    margin-left: -50px;
+}
+
+#contentEdit {
+    margin-top: 100px;
+    padding-left:15px;
+}
+
+#viewDiv {
+    background-color:#DDD9D4;
+    width: 30vw;
+    margin-left: 35vw;
+    margin-top: 20px;
+    border-radius: 25px;
+    opacity: 75%;
+    padding-top: 20px;
+    padding-left:40px
 }

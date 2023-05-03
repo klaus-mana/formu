@@ -126,7 +126,7 @@ a:hover {
 #viewAll {
     color:#FF8370;
     border-style:none;
-    font-family:"Space Grotesk", "serif";
+    font-family:'Space Mono', monospace;
     font-weight: lighter;
     text-align:center;
 }

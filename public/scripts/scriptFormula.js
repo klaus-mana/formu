@@ -5,6 +5,7 @@ var active_button = null;
 var formula_contents = null;
 var eqnLatex = "";
 var fnID = "";
+var userId = "6452ad4081ca31753412925d";
 
 window.MathJax = {
   tex2jax: {
@@ -28,44 +29,49 @@ function load_lib() {
 };
 
 
-function shareFunction() {
-    console.log("Implement, trying to share function");
-}
-
 window.addEventListener("load", () => {
   displayFunction();
   document.getElementById("editButton").addEventListener("click" , () => {
       editFunction();
   });
 
-  document.getElementById("shareButton").addEventListener("click", () => {
-      shareFunction();
+  document.getElementById("deleteButton").addEventListener("click", () => {
+    deleteFunction();
   });
-
-  document.getElementById("submitButton").addEventListener("click", async () => {
-    console.log("submit event");
-    var newInput = document.getElementById(`in_${fnID}`);
-    console.log(document.getElementById(`in_${fnID}`));
-    var newEqn = newInput.value;
-    var r = await submitChanges({raw_latex:newEqn});
-    //console.log(r);
-    var wrapper = document.getElementById("equation");
-    wrapper.innerHTML = `${newEqn}`
-    document.getElementById("editButton").style.display = "inline";
-    document.getElementById("submitButton").style.display = "none";
-    wrapper.style.backgroundColor ="#DDD9D4";
-    MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
-    });
+  
 });
 
+async function deleteFunction() {
+  var reqBody= {
+    form_id:fnID
+  };
+  var response = await(await fetch(`/user/${userId}/remove`, {
+    method:"DELETE",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify(reqBody)
+  }));
+  var response2 = await(await fetch(`/formula/${userId}/delete`, {
+    method:"DELETE",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify(reqBody)
+  }));
+  window.location.replace("/dashboard-full.html");
+  console.log(response);
+}
 async function displayFunction() {
   const queryString = window.location.search;
   var urlSearch = new URLSearchParams(queryString);
   var id = urlSearch.get("id");
   fnID = id;
-  var response = await(await fetch(`/formula/${id}`, {
+  var response = await(await fetch(`/formula/${fnID}`, {
     method:"GET"
   })).json();
+  var describe = document.getElementById("describe");
+  if(response.description.length!=0) {
+    describe.setAttribute("placeholder", "");
+    describe.setAttribute("value", response.description);
+  }
+
   var name = response.name;
   console.log(name);
   var tags = response.tags;
@@ -86,10 +92,40 @@ async function displayFunction() {
       document.getElementById("formTag").innerHTML =`#${oldTags}`;
       console.log(r);
     }
+  });
+  document.getElementById("describe").addEventListener("keypress", async function (e) {
+    if(e.keyCode == 13) {
+      var newDescribe = document.getElementById("describe").value;
+      var r = await submitChanges({description:newDescribe});
+    }
   })
   eqnLatex = response.raw_latex;
   document.getElementById("equation").innerHTML = eqnLatex;
   MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+  document.getElementById("submitButton").addEventListener("click", async () => {
+    console.log("submit event");
+    var newInput = document.getElementById(`in_${fnID}`);
+    console.log(document.getElementById(`in_${fnID}`));
+    var newEqn = newInput.value;
+    var newTag = document.getElementById("tagAdder").value;
+    var oldTags = response.tags;
+    oldTags.push(newTag);
+    var allChanges = {
+      raw_latex:newEqn, 
+      name: document.getElementById("formName").value,
+      description: document.getElementById("describe").value,
+      tags: oldTags
+    }
+    var r = await submitChanges(allChanges);
+    //console.log(r);
+    var wrapper = document.getElementById("equation");
+    wrapper.innerHTML = `${newEqn}`
+    document.getElementById("editButton").style.display = "inline";
+    document.getElementById("submitButton").style.display = "none";
+    wrapper.style.backgroundColor ="#DDD9D4";
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+    window.location.replace("/dashboard-full.html");
+    });
 }
 
 async function submitChanges(data){
