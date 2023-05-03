@@ -10,6 +10,7 @@
     width:240px;
     font-family: 'Space Mono', monospace;
     font-style:italic;
+    z-index:10000;
 }
 
 html, body{
@@ -29,6 +30,7 @@ html, body{
     height:2.5em;
     padding-left: 20px;
     padding-right: 30px;
+    z-index:1000000000;
 }
 
 h2{
@@ -76,7 +78,8 @@ h3{
     font-family: "Space Mono", "monospace";
     font-weight:lighter;
     width: 90vw;
-    margin-left:100px
+    margin-left:100px;
+    z-index:-1;
 }
 
 #allTitle {
