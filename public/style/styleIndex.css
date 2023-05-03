@@ -71,3 +71,7 @@ input {
 form{
     display:inline
 }
+
+#graphics {
+    background-image:url("../images/landing.png");
+}
