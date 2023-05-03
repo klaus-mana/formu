@@ -1,6 +1,6 @@
 html, body{
     margin:0;
-    font-family:'Gill Sans';
+    font-family:"Space Grotesk", "serif";
     background-color: #FFFDFA
 }
 
@@ -21,15 +21,20 @@ h2{
 }   
 
 h3{
-    font-size:20px
+    font-size:20px;
+    font-weight:900;
+    font-style:bold;
+    color:#426B69;
 }
 #content {
     margin-top: 100px;
-    font-family: "Helvetica";
+    font-family: "Space Mono", "monospace";
     font-weight:lighter;
     width: 100vw;
     background-color:#FFFDFA;
-    color:#1E151B
+    color:#1E151B;
+    padding-right: 40px;
+    margin-left:-40px
 }
 #mainTitle{
     display:inline;
@@ -98,8 +103,12 @@ h3{
     font-weight: lighter;
     color:#1E151B;
     width:65px;
+    font-family:'Space Mono', monospace;
 }
-
+h4{
+    font-style:bold;
+    color:#426B69
+}
 #runButton {
     background-color:#DDD9D4;
     border-style:none;
@@ -107,11 +116,18 @@ h3{
     padding-left:10px;
     padding-right:10px;
     border-radius:17px;
-    margin-left:5px
+    margin-left:5px;
+    font-family:'Space Mono', monospace;
+    text-align:centerl
 }
 
 #runButton:hover, #shareButton:hover, #editButton:hover{
-    color:#FFFDFA
+    color:#FFFDFA;
+    cursor:pointer;
+}
+
+#csvFile:hover{
+    cursor:pointer;
 }
 
 #useTitle {
@@ -146,4 +162,6 @@ h3{
     margin-left:50vw;
 }
 
-
+p {
+    padding-right:80px
+}
