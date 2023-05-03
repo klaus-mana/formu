@@ -27,48 +27,72 @@ function load_lib() {
 };
 
 
-function show_dict() {
+function showDict(latexDict) {
     //temporary
     var contentDiv = document.getElementById("content");
-    var latexDict = {
-      "id1" : ["latex", "title", "tag"],
-      "id2" : ["\\(2e^2\\)", "e^2", "e"],
-    };
     formula_contents = latexDict;
     console.log(latexDict);
     for (var fn of Object.keys(latexDict)) {
       var current = latexDict[fn]
       var thisDiv = document.createElement("div")
       thisDiv.setAttribute("class", "function");
-
       var newElement = 
       `
       <div class="function" id="${fn}">
-                <h4 class="formName">${current[1]}</h4>
+                <div class="titleWrapper">
+                  <p class="formName">${current[1]}</p><p class="tag">#${current[2]}</p>
+                </div>
                 <span class="mathSpan">
                     <p class="math" id="${fn}">${current[0]}</p>
                 </span>
-                <button class="viewEdit" id="button_${fn}">View/Edit</button>
+                <button class="viewEdit" id="button_${fn}">Edit/Use</button>
                 <hr>
-            </div>
+      </div>
       `;
       console.log(newElement);
       contentDiv.innerHTML = contentDiv.innerHTML + newElement;
       var buttonElement = document.getElementById(`button_${fn}`)
-      buttonElement.addEventListener("click", () => {
-        console.log("SDJFKLE");
-        editClicked(buttonElement);
-      })
       MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
     }
+     var buttons = document.getElementsByClassName("viewEdit");
+     for (var b of buttons) {
+      b.addEventListener('click', event => {
+        editClicked(b);
+      });
+     }
+
 
 }
 
 window.addEventListener("load", () => {
-  show_dict();
-  if(window.location == "./formula.html") {
-    console.log("WORK");
+  load_lib();
+  console.log(window.location);
+  var showFunctions = {}
+  if(window.location.pathname == "/dashboard-full.html") {
+    //showFunctions = getAllUser();
+    showFunctions = {
+      "id11" : ["latexx", "title-full", "tag"],
+      "id2" : ["\\(2e^2\\)", "e^2", "e"],
+    };
+  } else if(window.location.pathname == "/dashboard.html") {
+    //showFunctions = getAllRecents();
+    showFunctions = {
+      "abc" : ["latexx", "title-norm", "tagged"],
+      "idkk" : ["\\(2e^2\\)", "e^2", "e"],
+      "whatever" : ["\\(2^x\\)", "2 x squared", "math"]
+    };
+  } else if(window.location.pathname == "/explore.html") {
+    showFunctions = {
+      "exploreid1" : ["\\(\\frac{2}{x}\\)", "cool fraction", "lame tag"],
+      "exploreid2" : ["\\(\\frac{3}{x}\\)", "cool fraction 2", "lame tag 2"],
+      "exploreid3" : ["\\(\\frac{4}{x}\\)", "cool fraction 3", "lame tag 3"],
+      "exploreid4" : ["\\(\\frac{5}{x}\\)", "cool fraction 4", "lame tag 4"],
+      "exploreid12" : ["\\(\\frac{13}{x}\\)", "cool fraction 12", "lame tag 12"],
+      "exploreid13" : ["\\(\\frac{14}{x}\\)", "cool fraction 13", "lame tag 13"],
+      "exploreid14" : ["\\(\\frac{15}{x}\\)", "cool fraction 14", "lame tag 14"]
+    }
   }
+  showDict(showFunctions);
 });
 
 
@@ -78,7 +102,7 @@ window.addEventListener("load", () => {
 function editClicked(calledFrom) {
   var parent = calledFrom.parentElement;
   var allChildren = parent.allChildren;
-  console.log(parent);
+  console.log(`PAREnt : ${parent}`);
   console.log(allChildren);
   var function_id = parent.id;
   window.location.replace("/formula.html");

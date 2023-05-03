@@ -50,7 +50,7 @@ function show_dict() {
                 </span>
                 <button class="viewEdit" id="button_${fn}">View/Edit</button>
                 <hr>
-            </div>
+      </div>
       `;
       console.log(newElement);
       contentDiv.innerHTML = contentDiv.innerHTML + newElement;
@@ -58,7 +58,7 @@ function show_dict() {
       buttonElement.addEventListener("click", () => {
         console.log("SDJFKLE");
         editClicked(buttonElement);
-      })
+      });
       MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
     }
 
@@ -67,6 +67,7 @@ function show_dict() {
 function shareFunction() {
     console.log("Implement, trying to share function");
 }
+
 window.addEventListener("load", () => {
   displayFunction();
   document.getElementById("editButton").addEventListener("click" , () => {
