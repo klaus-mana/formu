@@ -78,9 +78,11 @@ app.get('/user/:id', async (req, res) => {
 app.get('/user/:id/formulas', async (req, res) => {
     try {
         const user = await User.findOne({_id: req.params.id});
-        const formulas = await user.formulas.map(async (id) => {
-            return Formula.findOne({_id: id});
-        });
+        const formulas = [];
+        for (id of user.formulas) {
+            const formula = await Formula.findOne({_id: id});
+            formulas.push(formula);
+        }
 
         res.status(200).send(JSON.stringify(formulas));
     } catch (e) {
