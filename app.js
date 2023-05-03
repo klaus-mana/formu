@@ -89,9 +89,11 @@ app.get('/user/:id', async (req, res) => {
 app.get('/user/:id/formulas', async (req, res) => {
     try {
         const user = await User.findOne({_id: req.params.id});
-        const formulas = await user.formulas.map(async (id) => {
-            return Formula.findOne({_id: id});
-        });
+        const formulas = [];
+        for (id of user.formulas) {
+            const formula = await Formula.findOne({_id: id});
+            formulas.push(formula);
+        }
 
         res.status(200).send(JSON.stringify(formulas));
     } catch (e) {
@@ -105,7 +107,7 @@ app.patch('/user/:id/save', async (req, res) => {
 
     try {
         const user = await User.findOne({_id: req.params.id});
-        user.formulas.append(req.body.form_id);
+        user.formulas.push(req.body.form_id);
         await user.save();
         res.status(203).send();
     } catch (e) {
@@ -139,11 +141,11 @@ app.get('/formula/:id', async (req, res) => {
     }
 });
 
-app.get('/formula/:term', async (req, res) => {
-    const results = []
+app.get('/formula/search/:term', async (req, res) => {
+    let results = []
 
     for (curTerm of req.params.term.split(' ')) {
-        const search = new RegExp(curTerm, 'i');
+        const regex = new RegExp(curTerm, 'i');
 
         try {
             const curRes = await Formula.find({
@@ -157,7 +159,7 @@ app.get('/formula/:term', async (req, res) => {
 
             results = results.concat(curRes);
         } catch (e) {
-            console.log(`\n💥 Server Error in /formula/${req.params.term}: ${e}\n`);
+            console.log(`\n💥 Server Error in /formula/search/${req.params.term}: ${e}\n`);
             res.status(500).send('Server Error when trying to search for formulas');
         }
     }

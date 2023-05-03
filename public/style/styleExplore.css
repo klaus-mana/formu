@@ -1,4 +1,3 @@
-/*Gill sans*/
 html, body{
     margin:0;
     font-family:'Space Grotesk', sans-serif;
@@ -16,6 +15,7 @@ html, body{
     height:2.5em;
     padding-left: 20px;
     padding-right: 30px;
+    z-index: 1000000000000;
 }
 
 h2{
@@ -26,21 +26,30 @@ h3{
     font-size:20px
 }
 
+#dashTitle {
+    display:inline;
+    color:#FFFDFA;
+    padding: 20px;
+    font-weight:100;
+}
 
 #leftSideTop {
     display:inline;
-    width:50%;
+    width:50%
 }
 
 #profileOption{
     color:#1E151B;
     font-weight:100;
-    padding-right:25px;
+    padding-right:20px;
     text-align:right;
     display:inline;
     width:50%
 }
 
+#exploreTitle {
+    color:#FF8370
+}
 #rightSideTop{
     display:inline;
     position:fixed;
@@ -57,30 +66,43 @@ h3{
 }
 
 #content {
-    padding-right: 50px;
-    padding-left: 80px;
+    padding-right: 160px;
+    padding-left: 160px;
     margin-top: 100px;
     font-family: 'Space Mono', monospace;
     font-weight:700;
-    width: 90vw
+    width: 90vw;
+    z-index:-1;
+    align-self:center;
 }
 
-#recents {
+#bigTitle {
     font-weight:100;
-    margin-left: -20px;
+    margin-left: 20px;
     font-size: 25px;
     padding-top:15px;
-    padding-bottom:0px;
+    padding-bottom:15px;
+    margin-bottom: 20px;
     color:#1E151B;
-    margin-bottom:0px;
     font-family:'Space Grotesk', sans-serif;
+}
+
+a{
+    color:inherit;
+    text-decoration:none;
+}
+a:hover { 
+    text-decoration: none; 
+    color:#8BB174;
+    cursor:pointer;
 }
 
 .function{
     margin-left: 25px;
-    /*padding-top:15px;*/
-    padding-bottom:35px;
-    padding-top: 40px
+    padding-bottom:40px;
+    padding-top: 40px;
+    margin-top:40px;
+    margin-bottom:40px
 }
 
 .formName {
@@ -92,8 +114,8 @@ h3{
 }
 .formula {
     margin-left:15px;
-    margin-top:15px;
-    margin-bottom: 20px;
+    margin-top:30px;
+    margin-bottom: 30px;
     color:#8B878A;
     font-size: 24px;
     width: 50vw;
@@ -106,40 +128,34 @@ hr{
     color:#426B69;
     position:absolute;
     background-color:#426B69;
-    width: 80vw;
+    width: 70vw;
     align-self:center;
     height:4px;
     margin-left: 3.5vw;
     padding-left:0;
     border-style:none;
-    margin-top:20px;
+    margin-top:40px;
     text-align:center;
 }
-/*#F8A497
-#FFAC9F*/
-#viewAll {
-    color:#1E151B;
-    position:fixed;
-    bottom: 50px;
-    left:40vw;
-    font-size: 22px;
-    border-style:none;
-    font-family:'Space Grotesk', sans-serif;
-    font-weight: lighter;
-    align-self:center;
-    text-align:center;
-    width: 20vw;
-    height:40px
+
+#search{
+    width: 45vw;
+    text-align:left;
+    border-radius: 17px;
+    background-color:#DDD9D4;
+    border-style: none;
+    height: 50px;
+    /*margin-left: 120px;*/
+    padding-left: 20px;
+    font-size: 20px;
+    font-family:"Space Grotesk", "serif";
 }
-#viewAll:hover {
-    color:#FF8370;
-}
-/*#8BB174*/
+
 .viewEdit{
     background-color:#8BB174;
     border-radius: 17px;
     position:relative;
-    margin-left: 81.5vw;
+    margin-left: 71.5vw;
     display: inline;
     width: 90px;
     border-style: none;
@@ -153,22 +169,6 @@ hr{
     text-align:center;
 }
 
-a{
-    color:inherit;
-    text-decoration:none;
-}
-a:hover { 
-    text-decoration: none; 
-    color:#8BB174;
-    cursor:pointer;
-}
-
-#dashTitle {
-    display:inline;
-    color:#FF8370;
-    padding: 20px;
-    font-weight:100;
-}
 
 .mathSpan{
     max-width:50vw;
@@ -179,8 +179,8 @@ a:hover {
 
 .math{
     padding:0;
-    margin:0;
-    margin-top:10px;
+    margin-top:20px;
+    margin-bottom:30px;
     margin-left:-30px;
     color:#8B878A;
     font-size:20px
@@ -203,4 +203,15 @@ a:hover {
 .viewEdit:hover{
     color:#FFFDFA;
     cursor:pointer;
+}
+
+#searchWrapper {
+    display:inline;
+    text-align:center;
+    align-self: center;
+    margin-left: 16vw;
+}
+.material-symbols-outlined {
+    font-size: 30px;
+    align-self: bottom;
 }

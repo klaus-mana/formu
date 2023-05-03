@@ -1,6 +1,6 @@
 html, body{
     margin:0;
-    font-family:'Gill Sans';
+    font-family:"Space Grotesk", "serif";
     background-color: #FFFDFA
 }
 
@@ -21,15 +21,20 @@ h2{
 }   
 
 h3{
-    font-size:20px
+    font-size:20px;
+    font-weight:900;
+    font-style:bold;
+    color:#426B69;
 }
 #content {
     margin-top: 100px;
-    font-family: "Helvetica";
+    font-family: "Space Mono", "monospace";
     font-weight:lighter;
     width: 100vw;
     background-color:#FFFDFA;
-    color:#1E151B
+    color:#1E151B;
+    padding-right: 40px;
+    margin-left:-40px
 }
 #mainTitle{
     display:inline;
@@ -37,7 +42,6 @@ h3{
     padding: 20px;
     font-weight:100;
     text-align:center;
-    margin:auto
 }
 
 #formName {
@@ -45,6 +49,11 @@ h3{
     font-size:24px;
     margin-left:15vw;
     padding:15px;
+    max-width:25vw;
+    display:inline;
+    margin-top: 20px;
+    margin-bottom:20px;
+    font-family:"Space Mono", "monospace";
 }
 
 #equation {
@@ -85,7 +94,7 @@ h3{
     color:#1E151B;
     width:65px;
 }*/
-#editButton, #shareButton {
+#editButton, #shareButton, #submitButton {
     background-color:#8BB174;
     border-radius: 17px;
     position:relative;
@@ -97,9 +106,17 @@ h3{
     padding-left: 12px;
     font-weight: lighter;
     color:#1E151B;
-    width:65px;
+    width:70px;
+    font-family:'Space Mono', monospace;
 }
 
+#submitButton {
+    display:none;
+}
+h4{
+    font-style:bold;
+    color:#426B69
+}
 #runButton {
     background-color:#DDD9D4;
     border-style:none;
@@ -107,11 +124,18 @@ h3{
     padding-left:10px;
     padding-right:10px;
     border-radius:17px;
-    margin-left:5px
+    margin-left:5px;
+    font-family:'Space Mono', monospace;
+    text-align:centerl
 }
 
-#runButton:hover, #shareButton:hover, #editButton:hover{
-    color:#FFFDFA
+#runButton:hover, #shareButton:hover, #editButton:hover, #submitButton:hover{
+    color:#FFFDFA;
+    cursor:pointer;
+}
+
+#csvFile:hover{
+    cursor:pointer;
 }
 
 #useTitle {
@@ -146,4 +170,36 @@ h3{
     margin-left:50vw;
 }
 
+p {
+    padding-right:80px
+}
 
+#tagAdder {
+    right:5px;
+    left:0px;
+    display:block;
+    width:7vw;
+    margin-left:15vw;
+    margin-bottom:15px;
+    font-size:16px
+}
+#formTag{
+    padding:0;
+    margin:0;
+    width: 6vw;
+    display:inline;
+    font-size:16px
+}
+
+#formTag {
+    font-size: 16px;
+    color:#8B878A;
+    display: inline;
+    margin-left: 10px;
+    font-family:'Space Mono', monospace;
+    font-style: italic
+}
+
+#formName:active{
+    cursor:pointer;
+}
