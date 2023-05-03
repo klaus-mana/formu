@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
+        <!--<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+        <script type="text/javascript" id="MathJax-script" async
+                src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>-->
+        <script type="module" src="./scripts/script.js"></script>
         <meta charset="utf-8">
         <title>Dashboard</title>
         <link id="cssFile" rel="stylesheet" type="text/css" href="styleFull.css">
@@ -22,24 +26,15 @@
         </div>
         <div id="content">
             <h3 id="allTitle">All Functions</h3>
-            <div class="function">
+            
+            <!--<div class="function">
                 <h4 class="formName">formula name</h4>
-                <input type="text" class="formula" value="formula here" onclick="edit_clicked(this)"></input>
-                <button class="viewEdit" onclick="edit_clicked(this);">View/Edit</button>
+                <span class="mathSpan">
+                    <p class="math" id="fn1">\(2x^2\)</p>
+                </span>
+                <button class="viewEdit" onclick="editClicked(this)">View/Edit</button>
                 <hr>
-
-            </div>
-            <div class="function">
-                <h4 class="formName">formula name</h4>
-                <input type="text" class="formula" value="formula here" onclick="edit_clicked(this)"></input>
-                <button class="viewEdit" onclick="edit_clicked(this)">View/Edit</button>
-                <hr>
-            </div>
-            <div class="function">
-                <h4 class="formName">formula name</h4>
-                <input type="text" class="formula" value="formula here" onclick="edit_clicked(this)"></input>
-                <button class="viewEdit" onclick="edit_clicked(this)">View/Edit</button>
-                <hr>
+            </div>-->
                 <!--
                 <div class="toggleView">
                     <a class="collapse actions" id="useFunc" onclick="input_data(this)">Use</a>
@@ -48,6 +43,5 @@
                 -->
             </div>
         </div>
-        <script src="./script.js"></script>
     </body>
 </html>

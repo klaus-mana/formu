@@ -47,16 +47,20 @@ h3{
     padding:15px;
 }
 
-#formula {
+#equation {
     align-self:center;
     background-color:#DDD9D4;
     border-style:none;
-    border-radius:25px;
-    width: 50vw;
-    font-size: 22px;
-    padding:15px;
+    border-radius:17px;
+    width: 45vw;
+    font-size: 15px;
+    padding-left: 25px;
+    padding-right: 25px;
+    padding-top:10px;
+    padding-bottom:10px;
     color:#1E151B;
     font-family: "Helvetica";
+    margin-left: -100px
 }
 
 #formDiv, #useDiv{
@@ -66,7 +70,7 @@ h3{
 #formDiv{
     display:inline;
 }
-
+/*
 #shareButton{
     background-color:#8BB174;
     border-radius: 25px;
@@ -79,11 +83,11 @@ h3{
     padding-left: 12px;
     font-weight: lighter;
     color:#1E151B;
-    width:60px;
-}
-#editButton {
+    width:65px;
+}*/
+#editButton, #shareButton {
     background-color:#8BB174;
-    border-radius: 25px;
+    border-radius: 17px;
     position:relative;
     display: inline;
     border-style: none;
@@ -93,9 +97,20 @@ h3{
     padding-left: 12px;
     font-weight: lighter;
     color:#1E151B;
-    width:60px;
+    width:65px;
 }
-#shareButton:hover, #editButton:hover{
+
+#runButton {
+    background-color:#DDD9D4;
+    border-style:none;
+    padding:5px;
+    padding-left:10px;
+    padding-right:10px;
+    border-radius:17px;
+    margin-left:5px
+}
+
+#runButton:hover, #shareButton:hover, #editButton:hover{
     color:#FFFDFA
 }
 
@@ -130,3 +145,5 @@ h3{
     display:inline;
     margin-left:50vw;
 }
+
+
