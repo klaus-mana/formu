@@ -48,7 +48,11 @@
                 <p>Run your entire dataset here! Be sure to format the first line of your file to let us know
                     which variables are which, i.e. x, y, z.
                 </p>
-                <input type="file" id="csvFile" accept=".csv" /><p>(file must be .csv)</p>
+
+                <form action="/" method="post" enctype="multipart/form-data">
+                    <input type="file" id="csvFile" accept=".csv" /><p>(file must be .csv)</p>
+                    <input type="submit" value="Run & Download Result">
+                </form>
             </div>
             <a href="./dashboard-full.html" id="ret">Return to Dashboard</a>
         </div>
