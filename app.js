@@ -5,7 +5,8 @@ const config= require('./config');
 
 const app = express();
 
-const User = require('./db/User.Schema')
+const User = require('./db/User.Schema');
+const Formula = require('./db/Formula.Schema');
 
 app.use(express.static('./public'));
 app.use(bodyParser.json());
@@ -37,7 +38,6 @@ app.post('/auth/login', async (req, res) => {
     if (!req.body.username || !req.body.password) res.status(403).send('Invalid Parameters.');
 
     try {
-        console.log(req.body.username);
         const user = await User.findOne({username: req.body.username});
         if (!user) res.status(403).send('Username and/or Password Incorrect.');
         const correctPass = user.loginWith(req.body.password);
@@ -57,31 +57,64 @@ app.post('/auth/login', async (req, res) => {
 app.get('/auth/check', async (req, res) => {
     if (!req.token) res.status(403).send('Invalid Parameters.');
 
-    const user = await Users.findOne({_id: req.token.user_id});
+    const user = await User.findOne({_id: req.token.user_id});
     if (user) res.status(200).send(req.token);
 
     res.status(403).send('No User Authenticated');
 });
 
+app.get('/user/:id', async (req, res) => {
+    try {
+        const user = await User.findOne({_id: req.token.id});
+        res.status(200).send(JSON.stringify(user));
+    } catch (e) {
+        console.log(`\n💥 Server Error in /user/${req.params.id}: ${err}\n`);
+        res.status(500).send('Server Error when trying to get user');
+    }
+});
+
+app.get('/user/:id/formulas', async (req, res) => {
+    try {
+        const user = await User.findOne({_id: req.token.id});
+        const formulas = await user.formulas.map(async (id) => {
+            return Formula.findOne({_id: id});
+        });
+
+        res.status(200).send(JSON.stringify(formulas));
+    } catch (e) {
+        console.log(`\n💥 Server Error in /user/${req.params.id}/formulas: ${err}\n`);
+        res.status(500).send('Server Error when trying to get formulas');
+    }
+});
+
+app.patch('/user/:id/save', async (req, res) => {
+    if (!req.body.form_id) res.status(403).send('Invalid Parameters.');
+
+    try {
+        const user = await User.findOne({_id: req.params.id});
+        user.formulas.append(req.body.form_id);
+        await user.save();
+        res.status(203).send();
+    } catch (e) {
+        console.log(`\n💥 Server Error in /user/${req.params.id}/save: ${err}\n`);
+        res.status(500).send('Server Error when trying to save a formula');
+    }
+});
+
+app.delete('/user/:id/remove', async (req, res) => {
+    if (!req.body.form_id) res.status(403).send('Invalid Parameters.');
+
+    try {
+        const user = await User.findOne({_id: req.params.id});
+        user.formulas = user.formulas.filter((id) => id !== req.body.form_id);
+        await user.save();
+        res.status(203).send();
+    } catch (e) {
+        console.log(`\n💥 Server Error in /user/${req.params.id}/remove: ${err}\n`);
+        res.status(500).send('Server Error when trying to remove a formula');
+    }
+});
+
 app.listen(port, ()  => {
     console.log(`🟢 Listening on ${port}`);
 });
-
-//===========CLIENT ROUTES===========//
-/*
-app.get('/', (req, res) => {
-
-});
-
-app.get('/explore', (req, res) => {
-
-});
-
-app.get('/formulas', (req, res) => {
-
-});
-
-app.get('/formulas/:id', (req, res) => {
-
-});
-*/

@@ -6,6 +6,7 @@ const formulaSchema = new Schema({
     description: String,
     raw_latex: String,
     user_id: String,
+    username: String,
     tags: [String],
     public: Boolean
 });
