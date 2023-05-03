@@ -1,5 +1,5 @@
 
-var userId = "64521db0f1028b25ce6aa424";
+var userId = "";
 
 window.onload = load_lib();
 function load_lib() {
@@ -16,6 +16,15 @@ function load_lib() {
 };
 
 window.onload = async function () {
+    // ==== CHECK USER AUTH === //
+    const authResponse = await (await fetch('/auth/check')).text();
+    if (authResponse == 'EXPIRED') {
+        window.location.href = '/login.html';
+    }
+    console.log(authResponse);
+    userId = authResponse;
+    // === END CHECK USER AUTH === //
+
     document.getElementById("searchButton").addEventListener("click", async () => {
         var results = await search();
     })
