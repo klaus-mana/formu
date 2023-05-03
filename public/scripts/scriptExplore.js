@@ -1,5 +1,6 @@
 
-var userId = "64521db0f1028b25ce6aa424";
+var userId = "6452ad4081ca31753412925d";
+var user = "bt2";
 
 window.onload = load_lib();
 function load_lib() {
@@ -42,7 +43,8 @@ async function search() {
         showDict(createSearchDict(response));
     }
     content.innerHTML = content.innerHTML + new_HTML;
-    console.log(response);
+    addListenersToButtons();
+    //console.log(response);
 }
 
 function createSearchDict(response) {
@@ -60,7 +62,7 @@ function showDict(latexDict) {
     var contentDiv = document.getElementById("content");
     /*console.log(latexDict);*/
     for (var fn of Object.keys(latexDict)) {
-      console.log(fn);
+      //console.log(fn);
       var current = latexDict[fn];
       var thisDiv = document.createElement("div");
       thisDiv.setAttribute("class", "function");
@@ -82,7 +84,7 @@ function showDict(latexDict) {
         var newElement = `
         <div class="function" id="div_${fn}">
                     <div class="titleWrapper">
-                    <p class="formName">${current[1]}</p><p class="tag">#${current[2]}</p>
+                    <p class="formName" id="name_${fn}">${current[1]}</p><p class="tag">#${current[2]}</p>
                     </div>
                     <span class="mathSpan">
                         <p class="math" id="math_${fn}">${current[0]}</p>
@@ -98,20 +100,57 @@ function showDict(latexDict) {
       //var buttonElement = document.getElementById(`${fn}`)
       MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
     }
-     var buttons = document.getElementsByClassName("viewEdit");
-     for (const b of buttons) {
-      console.log(b);
-      b.addEventListener('click', event => {
-        if(b.id.contains("other")) {
-            addToAccount(b);
-        } else {
-            editClicked(b);
-        }
-    }
-      );
-     }
 }
 
-function addToAccount(b) {
-    
+function addListenersToButtons() {
+    var buttons = document.getElementsByClassName("viewEdit");
+    for (const b of buttons) {
+     console.log(b.id.includes("other"));
+     b.addEventListener('click', async () => {
+       console.log("CLICKED!");
+       if(b.id.includes("other")) {
+           console.log("o");
+           addToAccount(b);
+       } else {
+           console.log("yo");
+           editClicked(b);
+       }
+    });
+    }
 }
+async function addToAccount(b) {
+    var fnIdStart = b.indexOf("_");
+    var fnId = b.substring(fnIdStart+1, b.size());
+    var otherUserId = "6452ad4081ca31753412925d";
+    var response = await(await fetch(`/formula/${fnId}`, {
+        method:"GET"
+      })).json();
+    var reqBody = {
+        user_id: userId,
+        raw_latex: response.raw_latex,
+        name: response.name,
+        tags: response.tags,
+        description: response.description,
+        username: user
+    }
+    var response = await(await fetch("/formula/create", {
+        method:"POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify(reqBody)
+      })).json();
+    console.log(response);
+}
+
+
+function editClicked(calledFrom) {
+    //console.log("here");
+    //console.log("calledFrom" + calledFrom.id);
+    //var parent = calledFrom.parentElement;
+    //var allChildren = parent.allChildren;
+    //console.log(`PAREnt : ${parent}`);
+    //console.log(allChildren);
+    var function_id = calledFrom.id;
+    console.log(function_id);
+    window.location.replace("/formula.html" + `?id=${function_id}`);
+    formula_contents = formula_contents[`${function_id}`]
+  }

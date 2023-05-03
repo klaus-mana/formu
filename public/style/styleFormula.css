@@ -94,7 +94,7 @@ h3{
     color:#1E151B;
     width:65px;
 }*/
-#editButton, #shareButton, #submitButton {
+#editButton, #shareButton, #submitButton, #deleteButton {
     background-color:#8BB174;
     border-radius: 17px;
     position:relative;
@@ -108,6 +108,10 @@ h3{
     color:#1E151B;
     width:70px;
     font-family:'Space Mono', monospace;
+}
+
+#deleteButton {
+    background-color:#FF8370
 }
 
 #submitButton {
@@ -129,7 +133,7 @@ h4{
     text-align:centerl
 }
 
-#runButton:hover, #shareButton:hover, #editButton:hover, #submitButton:hover{
+#runButton:hover, #shareButton:hover, #editButton:hover, #submitButton:hover, #deleteButton:hover{
     color:#FFFDFA;
     cursor:pointer;
 }
@@ -202,4 +206,29 @@ p {
 
 #formName:active{
     cursor:pointer;
+}
+
+#ret {
+    color:#1E151B;
+    position:fixed;
+    bottom: 20px;
+    left:40vw;
+    font-size: 18px;
+    border-style:none;
+    font-family:'Space Grotesk', sans-serif;
+    font-weight: lighter;
+    align-self:center;
+    text-align:center;
+    width: 20vw;
+    height:40px
+}
+#ret:hover {
+    color:#FF8370;
+}
+
+#describe{
+    display:block;
+    margin-left: 220px;
+    text-align:left;
+    margin-top:20px
 }
