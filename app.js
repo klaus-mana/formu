@@ -66,7 +66,7 @@ app.get('/auth/check', async (req, res) => {
 //===========USER API ENDPOINTS===========//
 app.get('/user/:id', async (req, res) => {
     try {
-        const user = await User.findOne({_id: req.token.id});
+        const user = await User.findOne({_id: req.params.id});
         res.status(200).send(JSON.stringify(user));
     } catch (e) {
         console.log(`\n💥 Server Error in /user/${req.params.id}: ${err}\n`);
@@ -76,7 +76,7 @@ app.get('/user/:id', async (req, res) => {
 
 app.get('/user/:id/formulas', async (req, res) => {
     try {
-        const user = await User.findOne({_id: req.token.id});
+        const user = await User.findOne({_id: req.params.id});
         const formulas = await user.formulas.map(async (id) => {
             return Formula.findOne({_id: id});
         });
@@ -117,6 +117,16 @@ app.delete('/user/:id/remove', async (req, res) => {
 });
 
 //===========FORMULA API ENDPOINTS===========//
+app.get('/formula/:id', async (req, res) => {
+    try {
+        const formula = await Formula.findOne({_id: req.params.id});
+        res.status(200).send(JSON.stringify(formula));
+    } catch (e) {
+        console.log(`\n💥 Server Error in /user/${req.params.id}: ${err}\n`);
+        res.status(500).send('Server Error when trying to get user');
+    }
+});
+
 app.post('/formula/create', async (req, res) => {
     if (!req.body.user_id || !req.body.raw_latex) res.status(403).send('Invalid Parameters.');
     const {name = 'Untitled Formula', description = '', tags = [], public = true} = req.body;
@@ -144,7 +154,6 @@ app.post('/formula/create', async (req, res) => {
 });
 
 app.patch('/formula/:id/edit', async (req, res) => {
-
     try {
         const formula = await Formula.findOne({_id: req.params.id});
 
@@ -162,6 +171,16 @@ app.patch('/formula/:id/edit', async (req, res) => {
     } catch (e) {
         console.log(`\n💥 Server Error in /formula/${req.params.id}/edit: ${err}\n`);
         res.status(500).send('Server Error when trying to edit a formula');
+    }
+});
+
+app.delete('/formula/:id/delete', async (req, res) => {
+    try {
+        const formula = await Formula.findOneAndDelete({_id: req.params.id});
+        res.status(200).send(JSON.stringify(formula));
+    } catch (e) {
+        console.log(`\n💥 Server Error in /formula/${req.params.id}/delete: ${err}\n`);
+        res.status(500).send('Server Error when trying to delete a formula');
     }
 });
 
