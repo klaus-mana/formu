@@ -3,7 +3,8 @@ var active_div = null;
 var active_div_orig = null;
 var active_button = null;
 var formula_contents = null;
-
+var eqnLatex = "";
+var fnID = "";
 
 window.MathJax = {
   tex2jax: {
@@ -27,43 +28,6 @@ function load_lib() {
 };
 
 
-function show_dict() {
-    //temporary
-    var contentDiv = document.getElementById("content");
-    var latexDict = {
-      "id1" : ["latex", "title", "tag"],
-      "id2" : ["\\(2e^2\\)", "e^2", "e"],
-    };
-    formula_contents = latexDict;
-    console.log(latexDict);
-    for (var fn of Object.keys(latexDict)) {
-      var current = latexDict[fn]
-      var thisDiv = document.createElement("div")
-      thisDiv.setAttribute("class", "function");
-
-      var newElement = 
-      `
-      <div class="function" id="${fn}">
-                <h4 id="name" class="formName">${current[1]}</h4>
-                <span class="mathSpan">
-                    <p class="math" id="${fn}">${current[0]}</p>
-                </span>
-                <button class="viewEdit" id="button_${fn}">View/Edit</button>
-                <hr>
-      </div>
-      `;
-      console.log(newElement);
-      contentDiv.innerHTML = contentDiv.innerHTML + newElement;
-      var buttonElement = document.getElementById(`button_${fn}`)
-      buttonElement.addEventListener("click", () => {
-        console.log("SDJFKLE");
-        editClicked(buttonElement);
-      });
-      MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
-    }
-
-}
-
 function shareFunction() {
     console.log("Implement, trying to share function");
 }
@@ -73,17 +37,68 @@ window.addEventListener("load", () => {
   document.getElementById("editButton").addEventListener("click" , () => {
       editFunction();
   });
+
   document.getElementById("shareButton").addEventListener("click", () => {
       shareFunction();
-  })
+  });
+
+  document.getElementById("submitButton").addEventListener("click", async () => {
+    console.log("submit event");
+    var newInput = document.getElementById(`in_${fnID}`);
+    console.log(document.getElementById(`in_${fnID}`));
+    var newEqn = newInput.value;
+    var r = await submitChanges({raw_latex:newEqn});
+    //console.log(r);
+    var wrapper = document.getElementById("equation");
+    wrapper.innerHTML = `${newEqn}`
+    document.getElementById("editButton").style.display = "inline";
+    document.getElementById("submitButton").style.display = "none";
+    wrapper.style.backgroundColor ="#DDD9D4";
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+    });
 });
 
-function displayFunction() {
-  var name = "Energy Equation"
-  document.getElementById("formName").innerHTML = name;
-  var eqnLatex = "\\(E=mc^2\\)";
+async function displayFunction() {
+  const queryString = window.location.search;
+  var urlSearch = new URLSearchParams(queryString);
+  var id = urlSearch.get("id");
+  fnID = id;
+  var response = await(await fetch(`/formula/${id}`, {
+    method:"GET"
+  })).json();
+  var name = response.name;
+  console.log(name);
+  var tags = response.tags;
+  document.getElementById("formTag").innerHTML = `#${tags}`;
+  document.getElementById("formName").value = name;
+  document.getElementById("formName").addEventListener("keypress", async function (e) {
+    if(e.keyCode == 13) {
+      var newVal = document.getElementById("formName").value;
+      var r = await submitChanges({name: newVal}); 
+    }
+  });
+  document.getElementById("tagAdder").addEventListener("keypress", async function (e) {
+    if(e.keyCode == 13) {
+      var newTag = document.getElementById("tagAdder").value;
+      var oldTags = response.tags;
+      oldTags.push(newTag);
+      var r = await submitChanges({tags:oldTags});
+      document.getElementById("formTag").innerHTML =`#${oldTags}`;
+      console.log(r);
+    }
+  })
+  eqnLatex = response.raw_latex;
   document.getElementById("equation").innerHTML = eqnLatex;
   MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+}
+
+async function submitChanges(data){
+  var response = await(await fetch(`/formula/${fnID}/edit`, {
+    method:"PATCH",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify(data)
+  })).json();
+  return response;
 }
 
 /*
@@ -102,40 +117,35 @@ function editClicked(calledFrom) {
 /*
 To be called from the button next to the equation on the formula page. 
 */
-function editFunction() {
-  console.log("YO");
+async function editFunction() {
+  console.log("edit event");
   var eqn = document.getElementById("equation");
   console.log(eqn);
   //AUTH HERRE? 
   if(true) {
-    var eqnLatex = "\\(2e^2\\)";//!!fix to get from url id and populate 
-    var eqnId = eqn.id;
     var newInputHTML = 
     `
-    <input class="inputChanges" type="text" value="${eqnLatex}" id="in_${eqn.id}"/>
+    <input class="inputChanges" type="text" value="${eqnLatex}" id="in_${fnID}"/>
     `
     eqn.innerHTML = newInputHTML;
-    var newInput = document.getElementById(`in_${eqn.id}`);
+    var newInput = document.getElementById(`in_${fnID}`);
     newInput.addEventListener("keypress", function (e) {
       if(e.key === "enter") {
         updateEqn(eqn.id, newInput.value);
       }
     });
-    /*newInput.style.backgroundColor ="#edeae6";
-    newInput.style.borderRadius = "10px";*/
     var calledFrom = document.getElementById("editButton");
-    console.log(calledFrom);
-    calledFrom.innerHTML = "Save";
+    var submitFrom = document.getElementById("submitButton");
+    //start changes here
+    calledFrom.style.display = "none";
+    submitFrom.style.display = "inline";
     var formSpan = document.getElementById("equation");
     formSpan.style.backgroundColor = "#edeae6";
-    calledFrom.addEventListener("click", () => {
-        updateEqn(eqnId, newInput.value);
-    });
   }
 }
 
 function updateEqn(id, newVal) {
-    console.log(`Need to implement actually sending, trying to update ${id} with a value of ${newVal}`)
+    console.log(`Starting update`);
     var wrapper = document.getElementById("equation");
     wrapper.innerHTML = `${newVal}`
     var editButton = document.getElementById("editButton");

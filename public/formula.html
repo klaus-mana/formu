@@ -11,14 +11,17 @@
         <script src="./scripts/scriptFormula.js"></script>
         <meta charset="utf-8">
         <title>Formula</title>
-        <link id="cssFile" rel="stylesheet" type="text/css" href="./script/styleFormula.css">
     </head>
     <body>
         <div id="topSection">
             <h2 id="mainTitle">Formula</h2>
         </div>
         <div id="content">
-            <h3 id="formName"></h3>
+            <div id="titleDiv">
+                <input type="text" id="formName"></input>
+                <p id="formTag"></p>
+                <input placeholder="Add tag..." id="tagAdder"/>
+            </div>
             <div id="formDiv">
                 <span id="formula" class = "mathSpan">
                     <p class="math" id="equation"></p>
@@ -26,6 +29,7 @@
                 <!--<input type="text" id="formula">-->
                 <div id="buttonsDiv">
                     <button id="editButton">Edit</button>
+                    <button id="submitButton">Submit</button>
                     <button id="shareButton">Share</button>
                 </div>
             </div>

@@ -204,3 +204,18 @@ a:hover {
     color:#FFFDFA;
     cursor:pointer;
 }
+
+#addNew {
+    position:fixed;
+    right: 15px;
+    bottom:15px;
+    background-color:#8BB174;
+    color:#FFFDFA;
+    border-radius:25px;
+    font-size:50px
+}
+
+#addNew:hover{
+    color:#1E151B;
+    cursor:pointer;
+}

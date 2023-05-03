@@ -42,7 +42,6 @@ h3{
     padding: 20px;
     font-weight:100;
     text-align:center;
-    margin:auto
 }
 
 #formName {
@@ -50,6 +49,11 @@ h3{
     font-size:24px;
     margin-left:15vw;
     padding:15px;
+    max-width:25vw;
+    display:inline;
+    margin-top: 20px;
+    margin-bottom:20px;
+    font-family:"Space Mono", "monospace";
 }
 
 #equation {
@@ -90,7 +94,7 @@ h3{
     color:#1E151B;
     width:65px;
 }*/
-#editButton, #shareButton {
+#editButton, #shareButton, #submitButton {
     background-color:#8BB174;
     border-radius: 17px;
     position:relative;
@@ -102,8 +106,12 @@ h3{
     padding-left: 12px;
     font-weight: lighter;
     color:#1E151B;
-    width:65px;
+    width:70px;
     font-family:'Space Mono', monospace;
+}
+
+#submitButton {
+    display:none;
 }
 h4{
     font-style:bold;
@@ -121,7 +129,7 @@ h4{
     text-align:centerl
 }
 
-#runButton:hover, #shareButton:hover, #editButton:hover{
+#runButton:hover, #shareButton:hover, #editButton:hover, #submitButton:hover{
     color:#FFFDFA;
     cursor:pointer;
 }
@@ -164,4 +172,38 @@ h4{
 
 p {
     padding-right:80px
+}
+
+#titleDiv {
+    /*display:inline;*/
+}
+
+#tagAdder {
+    right:5px;
+    left:0px;
+    display:block;
+    width:7vw;
+    margin-left:15vw;
+    margin-bottom:15px;
+    font-size:16px
+}
+#formTag{
+    padding:0;
+    margin:0;
+    width: 6vw;
+    display:inline;
+    font-size:16px
+}
+
+#formTag {
+    font-size: 16px;
+    color:#8B878A;
+    display: inline;
+    margin-left: 10px;
+    font-family:'Space Mono', monospace;
+    font-style: italic
+}
+
+#formName:active{
+    cursor:pointer;
 }

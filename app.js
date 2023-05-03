@@ -122,7 +122,7 @@ app.get('/formula/:id', async (req, res) => {
         const formula = await Formula.findOne({_id: req.params.id});
         res.status(200).send(JSON.stringify(formula));
     } catch (e) {
-        console.log(`\n💥 Server Error in /user/${req.params.id}: ${err}\n`);
+        console.log(`\n💥 Server Error in /user/${req.params.id}: ${e}\n`);
         res.status(500).send('Server Error when trying to get user');
     }
 });
@@ -148,7 +148,7 @@ app.post('/formula/create', async (req, res) => {
 
         res.status(200).send(JSON.stringify(formula));
     } catch (e) {
-        console.log(`\n💥 Server Error in /formula/create: ${err}\n`);
+        console.log(`\n💥 Server Error in /formula/create: ${e}\n`);
         res.status(500).send('Server Error when trying to create a formula');
     }
 });
@@ -169,7 +169,7 @@ app.patch('/formula/:id/edit', async (req, res) => {
 
         res.status(200).send(formula);
     } catch (e) {
-        console.log(`\n💥 Server Error in /formula/${req.params.id}/edit: ${err}\n`);
+        console.log(`\n💥 Server Error in /formula/${req.params.id}/edit: ${e}\n`);
         res.status(500).send('Server Error when trying to edit a formula');
     }
 });
