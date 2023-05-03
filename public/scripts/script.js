@@ -27,45 +27,65 @@ function load_lib() {
   s.parentNode.insertBefore(script, s);
 };
 
-async function getDict() {
-  console.log("ayo");
-  var response = await(await fetch(`/user/${userId}/formulas`, {
-    method:"GET"
-  })).json();
-  console.log(response);
-  return response;
+async function getDict(keyword="full") {
+  if(keyword == "full") {
+    var retDict ={};
+    var response = await(await fetch(`/user/${userId}/formulas`, {
+      method:"GET"
+    })).json();
+    for(var formula of response) {
+      retDict[`${formula._id}`] = [`${formula.raw_latex}`, `${formula.name}`, `${formula.tags}`];
+    }
+    return retDict;
+  } else {
+    var i = 0;
+    var retDict ={};
+    var response = await(await fetch(`/user/${userId}/formulas`, {
+      method:"GET"
+    })).json();
+    for(var formula of response) {
+      retDict[`${formula._id}`] = [`${formula.raw_latex}`, `${formula.name}`, `${formula.tags}`];
+      i++;
+      if(i>2) {
+        return retDict;
+      }
+    }
+  }
 }
 
 function showDict(latexDict) {
     //temporary
+    console.log("showing");
     var contentDiv = document.getElementById("content");
     formula_contents = latexDict;
     /*console.log(latexDict);*/
     for (var fn of Object.keys(latexDict)) {
-      var current = latexDict[fn]
-      var thisDiv = document.createElement("div")
+      console.log(fn);
+      var current = latexDict[fn];
+      var thisDiv = document.createElement("div");
       thisDiv.setAttribute("class", "function");
       var newElement = 
       `
-      <div class="function" id="${fn}">
+      <div class="function" id="div_${fn}">
                 <div class="titleWrapper">
                   <p class="formName">${current[1]}</p><p class="tag">#${current[2]}</p>
                 </div>
                 <span class="mathSpan">
-                    <p class="math" id="${fn}">${current[0]}</p>
+                    <p class="math" id="math_${fn}">${current[0]}</p>
                 </span>
-                <button class="viewEdit" id="button_${fn}">Edit/Use</button>
+                <button class="viewEdit" id="${fn}">Edit/Use</button>
                 <hr>
       </div>
       `;
       /*
       console.log(newElement);*/
       contentDiv.innerHTML = contentDiv.innerHTML + newElement;
-      var buttonElement = document.getElementById(`button_${fn}`)
+      //var buttonElement = document.getElementById(`${fn}`)
       MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
     }
      var buttons = document.getElementsByClassName("viewEdit");
-     for (var b of buttons) {
+     for (const b of buttons) {
+      console.log(b);
       b.addEventListener('click', event => {
         editClicked(b);
       });
@@ -97,7 +117,7 @@ async function createNewFunction() {
   window.location.replace("/formula.html" + `?id=${response._id}`);
 }
 
-window.onload = function () {
+window.onload = async function () {
   MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
   //load_lib();
   /*console.log(window.location);*/
@@ -108,6 +128,7 @@ window.onload = function () {
       "id11" : ["latexx", "title-full", "tag"],
       "id2" : ["\\(2e^2\\)", "e^2", "e"],
     };
+    showDict(await getDict());
   } else if(window.location.pathname == "/dashboard.html") {
     console.log("HERE");
     //showFunctions = getAllRecents();
@@ -116,18 +137,8 @@ window.onload = function () {
       "idkk" : ["\\(2e^2\\)", "e^2", "e"],
       "whatever" : ["\\(2^x\\)", "2 x squared", "math"]
     };
-  } else if(window.location.pathname == "/explore.html") {
-    showFunctions = {
-      "exploreid1" : ["\\(\\frac{2}{x}\\)", "cool fraction", "lame tag"],
-      "exploreid2" : ["\\(\\frac{3}{x}\\)", "cool fraction 2", "lame tag 2"],
-      "exploreid3" : ["\\(\\frac{4}{x}\\)", "cool fraction 3", "lame tag 3"],
-      "exploreid4" : ["\\(\\frac{5}{x}\\)", "cool fraction 4", "lame tag 4"],
-      "exploreid12" : ["\\(\\frac{13}{x}\\)", "cool fraction 12", "lame tag 12"],
-      "exploreid13" : ["\\(\\frac{14}{x}\\)", "cool fraction 13", "lame tag 13"],
-      "exploreid14" : ["\\(\\frac{15}{x}\\)", "cool fraction 14", "lame tag 14"]
-    }
+    showDict(await getDict("few"));
   }
-  showDict(getDict());
     document.getElementById("addNew").addEventListener('click', event => {
     console.log("event");
     createNewFunction();
@@ -140,12 +151,15 @@ window.onload = function () {
 * Should be called from the button associated with the function. 
 */
 function editClicked(calledFrom) {
-  var parent = calledFrom.parentElement;
-  var allChildren = parent.allChildren;
-  console.log(`PAREnt : ${parent}`);
-  console.log(allChildren);
-  var function_id = parent.id;
-  window.location.replace("/formula.html");
+  //console.log("here");
+  //console.log("calledFrom" + calledFrom.id);
+  //var parent = calledFrom.parentElement;
+  //var allChildren = parent.allChildren;
+  //console.log(`PAREnt : ${parent}`);
+  //console.log(allChildren);
+  var function_id = calledFrom.id;
+  console.log(function_id);
+  window.location.replace("/formula.html" + `?id=${function_id}`);
   formula_contents = formula_contents[`${function_id}`]
 }
 

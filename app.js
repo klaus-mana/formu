@@ -130,11 +130,11 @@ app.get('/formula/:id', async (req, res) => {
     }
 });
 
-app.get('/formula/:term', async (req, res) => {
-    const results = []
+app.get('/formula/search/:term', async (req, res) => {
+    let results = []
 
     for (curTerm of req.params.term.split(' ')) {
-        const search = new RegExp(curTerm, 'i');
+        const regex = new RegExp(curTerm, 'i');
 
         try {
             const curRes = await Formula.find({
@@ -148,7 +148,7 @@ app.get('/formula/:term', async (req, res) => {
 
             results = results.concat(curRes);
         } catch (e) {
-            console.log(`\n💥 Server Error in /formula/${req.params.term}: ${e}\n`);
+            console.log(`\n💥 Server Error in /formula/search/${req.params.term}: ${e}\n`);
             res.status(500).send('Server Error when trying to search for formulas');
         }
     }
