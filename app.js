@@ -122,9 +122,38 @@ app.get('/formula/:id', async (req, res) => {
         const formula = await Formula.findOne({_id: req.params.id});
         res.status(200).send(JSON.stringify(formula));
     } catch (e) {
-        console.log(`\n💥 Server Error in /user/${req.params.id}: ${err}\n`);
-        res.status(500).send('Server Error when trying to get user');
+        console.log(`\n💥 Server Error in /formula/${req.params.id}: ${err}\n`);
+        res.status(500).send('Server Error when trying to get formula');
     }
+});
+
+app.get('/formula/:term', async (req, res) => {
+    const results = []
+
+    for (curTerm of req.params.term.split(' ')) {
+        const search = new RegExp(curTerm, 'i');
+
+        try {
+            const curRes = await Formula.find({
+                $and: [
+                    {$or: [
+                        {name: regex}, {description: regex}, {tags : { $in: [regex] }}
+                    ]},
+                    { public: true }
+                ]
+    
+    
+            });
+
+            results = results.concat(curRes);
+        } catch (e) {
+            console.log(`\n💥 Server Error in /formula/${req.params.term}: ${err}\n`);
+            res.status(500).send('Server Error when trying to search for formulas');
+        }
+    }
+
+    const retval = [...new Set(results)];
+    res.status(200).send(retval);
 });
 
 app.post('/formula/create', async (req, res) => {
