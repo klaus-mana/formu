@@ -4,6 +4,7 @@ const mongoose   = require('mongoose');
 const config     = require('./config');
 const utils      = require('./utils');
 const multer     = require('multer');
+const session    = require('express-session');
 
 const app = express();
 
@@ -22,6 +23,14 @@ const Formula = require('./db/Formula.Schema');
 
 app.use(express.static('./public'));
 app.use(bodyParser.json());
+app.use(session({
+    secret: config.session_secret,
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+        maxAge: 1000 * 60 * 60 * 24
+    }
+}));
 
 const mongodb_url = config.mongodb_url;
 const port        = config.port;
@@ -38,8 +47,9 @@ app.post('/auth/register', async (req, res) => {
         const user = new User({username: req.body.username, email: req.body.email});
         user.setPassword(req.body.password);
         await user.save();
-        const token = {user_id: user._id};
-        res.status(200).send(JSON.stringify(token));
+        
+        req.session.user_id = user._id;
+        res.status(200).send(JSON.stringify(user._id));
     } catch (e) {
         console.log(`\n💥 Server Error in /auth/register: ${e}\n`);
         res.status(500).send('Server Error when creating the User.');
@@ -58,21 +68,23 @@ app.post('/auth/login', async (req, res) => {
             return;
         }
 
-        const token = {user_id: user._id};
-        res.status(200).send(JSON.stringify(token));
+        req.session.user_id = user._id;
+        res.status(200).send(JSON.stringify(user._id));
     } catch (e) {
         console.log(`\n💥 Server Error in /auth/login: ${e}\n`);
         res.status(500).send('Server Error when trying to log in.');
     }
 });
 
-app.get('/auth/check', async (req, res) => {
-    if (!req.token) res.status(403).send('Invalid Parameters.');
+app.get('/auth/check', (req, res) => {
+    if (!req.session.user_id) res.status(403).send('EXPIRED');
+    res.status(200).send(req.session.user_id);
+});
 
-    const user = await User.findOne({_id: req.token.user_id});
-    if (user) res.status(200).send(req.token);
-
-    res.status(403).send('No User Authenticated');
+app.get('/auth/logout', (req, res) => {
+    req.session.destroy(err => {
+        if (err) { console.log(err) } else { res.redirect('/') }
+    });
 });
 
 //===========USER API ENDPOINTS===========//

@@ -21,9 +21,7 @@ form.addEventListener('submit', async (e) => {
     
     if(r.ok) {
         const response = await r.json();
-        console.log("Successful login");
-        console.log("Token: " + response.token);
-        window.location.replace("/dashboard.html")
+        window.location.replace("/dashboard.html");
     } else {
         const response = await r.text()
         console.log("Unsuccessful: " + response);

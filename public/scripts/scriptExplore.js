@@ -1,6 +1,5 @@
-
-var userId = "6452ad4081ca31753412925d";
-var user = "bt2";
+var userId = "";
+var user = "";
 
 window.onload = load_lib();
 function load_lib() {
@@ -17,6 +16,15 @@ function load_lib() {
 };
 
 window.onload = async function () {
+    // ==== CHECK USER AUTH === //
+    const authResponse = await (await fetch('/auth/check')).text();
+    if (authResponse == 'EXPIRED') {
+        window.location.href = '/login.html';
+    }
+    console.log(authResponse);
+    userId = authResponse;
+    // === END CHECK USER AUTH === //
+
     document.getElementById("searchButton").addEventListener("click", async () => {
         var results = await search();
     })

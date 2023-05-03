@@ -3,7 +3,7 @@ var active_div = null;
 var active_div_orig = null;
 var active_button = null;
 var formula_contents = null;
-var userId = "6452ad4081ca31753412925d";
+var userId = "";
 
 window.MathJax = {
   tex2jax: {
@@ -28,8 +28,7 @@ function load_lib() {
 };
 
 async function getDict(keyword="full") {
-  if(keyword == "full") {
-    var retDict ={};
+  var retDict ={};
     var response = await(await fetch(`/user/${userId}/formulas`, {
       method:"GET"
     })).json();
@@ -38,24 +37,14 @@ async function getDict(keyword="full") {
         retDict[`${formula._id}`] = [`${formula.raw_latex}`, `${formula.name}`, `${formula.tags}`];
       }
     }
+
+  if(keyword == "full") {
     return retDict;
   } else {
     var i = 0;
-    var retDict ={};
-    var response = await(await fetch(`/user/${userId}/formulas`, {
-      method:"GET"
-    })).json();
-    for(var formula of response) {
-      if(formula != null) {
-        retDict[`${formula._id}`] = [`${formula.raw_latex}`, `${formula.name}`, `${formula.tags}`];
-        console.log(retDict[`${formula._id}`]);
-        i+=1;
-        if(i>2) {
-          return retDict;
-        }
-      }
-      return retDict;
-    }
+    if (Object.keys(retDict).length <= 3) return retDict;
+
+    return Object.fromEntries(Object.entries(retDict).slice(0,3));
   }
 }
 
@@ -127,6 +116,16 @@ async function createNewFunction() {
 }
 
 window.onload = async function () {
+
+  // ==== CHECK USER AUTH === //
+  const authResponse = await (await fetch('/auth/check')).text();
+  if (authResponse == 'EXPIRED') {
+    window.location.href = '/login.html';
+  }
+  console.log(authResponse);
+  userId = authResponse;
+  // === END CHECK USER AUTH === //
+
   MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
   //load_lib();
   /*console.log(window.location);*/
