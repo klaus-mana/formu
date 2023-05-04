@@ -1,10 +1,17 @@
-
+/*
+Author: Bella Salter
+Purpose: To be used with dashboard.html and dashboard-full.html for FormU.
+*/
 var active_div = null;
 var active_div_orig = null;
 var active_button = null;
 var formula_contents = null;
 var userId = "";
+var allTags = [];
 
+/*
+MathJax setup for the window
+*/
 window.MathJax = {
   tex2jax: {
     inlineMath: [ ['$','$'], ["\\(","\\)"] ],
@@ -12,21 +19,23 @@ window.MathJax = {
   }
 };
  
-
+/*
+Loads the MathJax for the window.
+*/
 window.onload = load_lib();
 function load_lib() {
   var script = document.createElement('script');
   script.type = 'text/javascript';
   script.async = true;
-  /*
-  script.onload = function () {
-    MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
-  };*/
   script.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML';
   var s = document.getElementsByTagName('script')[0];
   s.parentNode.insertBefore(script, s);
 };
 
+/*
+Formats a dictionary of functions from the response from the server.
+If keyword is full, then returns everything. Otherwise, only returns the first 3.
+*/
 async function getDict(keyword="full") {
   var retDict ={};
     var response = await(await fetch(`/user/${userId}/formulas`, {
@@ -35,9 +44,14 @@ async function getDict(keyword="full") {
     for(var formula of response) {
       if(formula != null) {
         retDict[`${formula._id}`] = [`${formula.raw_latex}`, `${formula.name}`, `${formula.tags}`];
+        for(var tag of formula.tags) {
+          console.log(tag);
+          if(!allTags.includes(tag)) {
+            allTags.push(tag);
+          }
+        }
       }
     }
-
   if(keyword == "full") {
     return retDict;
   } else {
@@ -48,6 +62,9 @@ async function getDict(keyword="full") {
   }
 }
 
+/*
+Formats the given dictionary properly for display and shows contents on the page.
+*/
 function showDict(latexDict) {
     //temporary
     console.log("showing");
@@ -92,6 +109,9 @@ function showDict(latexDict) {
 
 }
 
+/*
+Creates a new blank function for the user.
+*/
 async function createNewFunction() {
   console.log("Creating new function");
   var reqBody = {
@@ -115,6 +135,9 @@ async function createNewFunction() {
   window.location.replace("/formula.html" + `?id=${response._id}`);
 }
 
+/*
+Window initiation, checks user auth and adds some necessary event listeners.
+*/
 window.onload = async function () {
 
   // ==== CHECK USER AUTH === //
@@ -127,33 +150,58 @@ window.onload = async function () {
   // === END CHECK USER AUTH === //
 
   MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
-  //load_lib();
-  /*console.log(window.location);*/
   var showFunctions = {}
   if(window.location.pathname == "/dashboard-full.html") {
-    //showFunctions = getAllUser();
-    showFunctions = {
-      "id11" : ["latexx", "title-full", "tag"],
-      "id2" : ["\\(2e^2\\)", "e^2", "e"],
-    };
     showDict(await getDict());
+    await formatTags();
   } else if(window.location.pathname == "/dashboard.html") {
-    console.log("HERE");
-    //showFunctions = getAllRecents();
-    showFunctions = {
-      "abc" : ["latexx", "title-norm", "tagged"],
-      "idkk" : ["\\(2e^2\\)", "e^2", "e"],
-      "whatever" : ["\\(2^x\\)", "2 x squared", "math"]
-    };
     showDict(await getDict("few"));
   }
     document.getElementById("addNew").addEventListener('click', event => {
-    console.log("event");
     createNewFunction();
   });
 };
 
+/*
+Gets a dictionary of the formulas tagged with the given tag. Also calls showDict to show this function.
+*/
+async function getTagged(tag) {
+  var retDict ={};
+    var response = await(await fetch(`/user/${userId}/formulas`, {
+      method:"GET"
+    })).json();
+    for(var formula of response) {
+      if(formula != null && formula.tags.includes(tag)) {
+        retDict[`${formula._id}`] = [`${formula.raw_latex}`, `${formula.name}`, `${formula.tags}`];
+      }
+    }
+  document.getElementById("content").innerHTML = 
+  `
+  <h3 id="bigTitle">All Functions</h3>
+  <span id="addNew" class="material-symbols-outlined">add_circle</span>
+  `
+  showDict(retDict);
+}
 
+/*
+Formats the tags properly and adds event listeners.
+*/
+async function formatTags() {
+  var tagsLocation = document.getElementById("tagsDiv");
+  console.log(allTags);
+  for(const tag of allTags) {
+    var newHTMl= 
+    `
+    <h4 class="tags"><a id="${tag}">${tag}</a></h4>
+    `
+    tagsLocation.innerHTML = tagsLocation.innerHTML + newHTMl;
+  }
+  for(const tag of allTags) {
+    document.getElementById(tag).addEventListener("click", async () => {
+      await getTagged(tag);
+    })
+  }
+}
 
 /*
 * Should be called from the button associated with the function. 
@@ -171,10 +219,15 @@ function editClicked(calledFrom) {
   formula_contents = formula_contents[`${function_id}`]
 }
 
+/*
+Directs the user to the full dashboard.
+*/
 function goToViewAll() {
   window.location.replace("/dashboard-full.html");
 }
+
 /*
+Goes to the edit function page for the right function.
 To be called from the button next to the equation on the formula page. 
 */
 function editFunction(calledFrom) {
@@ -203,8 +256,4 @@ function editFunction(calledFrom) {
       }
     })
   }
-}
-
-function updateEqn(id, newVal) {
-  console.log(`Need to implement, trying to update ${id} with a value of ${newVal}`)
 }

@@ -4,8 +4,7 @@ html, body{
 }
 
 #topSectionSignup {
-    /*background-image: linear-gradient(to right, #FF8370, #1E151B);*/
-    background-color:#547241;
+    background-image: linear-gradient(to right, #FF8370, #1E151B);
     position:fixed;
     top:0;
     width:100vw;
@@ -26,7 +25,7 @@ h3{
 }
 #content {
     margin-top: 100px;
-    font-family: "Helvetica";
+    font-family: "Space Mono", "monospace";
     font-weight:lighter;
     width: 100vw;
     background-color:#FFFDFA;
@@ -66,9 +65,13 @@ p{
     margin: 30px;
     margin-bottom:0px;
     font-size: 18px;
-    color:#FFFDFA
+    color:#FFFDFA;
+    font-family: "Space Mono", "monospace";
 }
 
+#submitButton:hover {
+    cursor:pointer;
+}
 #buttonDiv {
     text-align:center;
 }
@@ -137,4 +140,12 @@ p{
     opacity: 75%;
     padding-top: 20px;
     padding-left:40px
+}
+
+
+#submitButton:active {
+    -webkit-box-shadow: inset 0px 0px 5px #547241;
+    -moz-box-shadow: inset 0px 0px 5px #547241;
+    box-shadow: inset 0px 0px 5px #547241;
+   outline: none;
 }

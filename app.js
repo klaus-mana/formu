@@ -1,3 +1,9 @@
+/*
+    File: app.js
+    Project: FormU CSC 337 Final Project
+    Author: Klaus Mana
+    Purpose: Serverside JS for function, user, and auth API endpoints. 
+*/
 const express    = require('express');
 const bodyParser = require('body-parser');
 const mongoose   = require('mongoose');

@@ -1,3 +1,9 @@
+<!--
+    File: dashboard-full.html
+    Project: FormU CSC 337 Final Project
+    Author:Bella Salter
+    Purpose: Dashboard for FormU displaying all functions, allowing filtering by tag.
+-->
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -12,8 +18,8 @@
     </head>
     <body>
         <div id="topSection">
-            <div id="leftSideTop"></div>
-                <h2 id="dashTitle"><a href="./dashboard.html">Dashboard</a></h2>
+            <div id="leftSideTop">
+                <h2 class="topOptions" id="dashTitle"><a href="./dashboard.html">Dashboard</a></h2>
                 <h3 class="topOptions"><a href="./explore.html">Explore</a></h3>
                 <h3 class="topOptions"><a href="./help.html">Help</a></h3>
             </div>
@@ -23,27 +29,10 @@
         </div>
         <div id="tagsDiv">
             <h3 id="tagsTitle">My Tags</h3>
-            <h4 class="tags"><a onclick="getTagged(tag1)">tag1</a></h4>
         </div>
         <div id="content">
             <h3 id="bigTitle">All Functions</h3>
-            
-            <!--<div class="function">
-                <h4 class="formName">formula name</h4>
-                <span class="mathSpan">
-                    <p class="math" id="fn1">\(2x^2\)</p>
-                </span>
-                <button class="viewEdit" onclick="editClicked(this)">View/Edit</button>
-                <hr>
-            </div>-->
-                <!--
-                <div class="toggleView">
-                    <a class="collapse actions" id="useFunc" onclick="input_data(this)">Use</a>
-                    <a class="collapse actions" id="shareFunc" onclick="share(this)">Share</a>
-                </div>
-                -->
                 <span id="addNew" class="material-symbols-outlined">add_circle</span>
-            </div>
         </div>
     </body>
 </html>

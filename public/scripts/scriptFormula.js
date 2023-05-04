@@ -1,4 +1,7 @@
-
+/*
+Author: Bella Salter
+Purpose: To be used with explore.html for FormU.
+*/
 var active_div = null;
 var active_div_orig = null;
 var active_button = null;
@@ -7,22 +10,26 @@ var eqnLatex = "";
 var fnID = "";
 var userId = "";
 
+/*
+MathJax config
+*/
 window.MathJax = {
   tex2jax: {
     inlineMath: [ ['$','$'], ["\\(","\\)"] ],
     displayMath: [ ['$$','$$'], ["\\[","\\]"] ]
   }
 };
- 
-
 window.onload = load_lib();
+
+/*
+Checks user auth and loads MathJax
+*/
 async function load_lib() {
   // ==== CHECK USER AUTH === //
   const authResponse = await (await fetch('/auth/check')).text();
   if (authResponse == 'EXPIRED') {
       window.location.href = '/login.html';
   }
-  console.log(authResponse);
   userId = authResponse;
   // === END CHECK USER AUTH === //
 
@@ -37,7 +44,9 @@ async function load_lib() {
   s.parentNode.insertBefore(script, s);
 };
 
-
+/*
+Creates necessary event listeners on load.
+*/
 window.addEventListener("load", () => {
   displayFunction();
   document.getElementById("editButton").addEventListener("click" , () => {
@@ -78,6 +87,9 @@ window.addEventListener("load", () => {
   
 });
 
+/*
+Runs the simple input in the formula.
+*/
 async function useSimple() {
   var input = document.getElementById("simpleInput").value;
   var reqBody ={};
@@ -87,17 +99,18 @@ async function useSimple() {
     var varName = fullX[0].trim();
     var varVal = fullX[1].trim();
     reqBody[varName] = parseFloat(varVal);
-    console.log(`Run ${varName} = ${varVal}`);
   }
-  console.log(reqBody);
   var response = await (await fetch(`/formula/${fnID}/run/simple`, {
     method:"POST",
     headers: {"Content-Type": "application/json"},
     body: JSON.stringify(reqBody)
   })).text();
-  console.log(await response);
+  document.getElementById("outputPlace").value = response;
 }
 
+/*
+Deletes the function.
+*/
 async function deleteFunction() {
   var reqBody= {
     form_id:fnID
@@ -113,9 +126,12 @@ async function deleteFunction() {
     body: JSON.stringify(reqBody)
   }));
   window.location.replace("/dashboard-full.html");
-  console.log(response);
 }
 
+/*
+Gets all details about the function and displays them.
+Adds event listeners to the buttons now that all fields are populated.
+*/
 async function displayFunction() {
   const queryString = window.location.search;
   var urlSearch = new URLSearchParams(queryString);
@@ -131,7 +147,6 @@ async function displayFunction() {
   }
 
   var name = response.name;
-  console.log(name);
   var tags = response.tags;
   document.getElementById("formTag").innerHTML = `#${tags}`;
   document.getElementById("formName").value = name;
@@ -149,7 +164,6 @@ async function displayFunction() {
       oldTags.push(newTag);
       var r = await submitChanges({tags:oldTags});
       document.getElementById("formTag").innerHTML =`#${oldTags}`;
-      console.log(r);
     }
   }
   });
@@ -163,9 +177,7 @@ async function displayFunction() {
   document.getElementById("equation").innerHTML = eqnLatex;
   MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
   document.getElementById("submitButton").addEventListener("click", async () => {
-    console.log("submit event");
     var newInput = document.getElementById(`in_${fnID}`);
-    console.log(document.getElementById(`in_${fnID}`));
     var newEqn = newInput.value;
     var oldTags = response.tags;
     var newTag = document.getElementById("tagAdder").value;
@@ -179,7 +191,6 @@ async function displayFunction() {
       tags: oldTags
     }
     var r = await submitChanges(allChanges);
-    //console.log(r);
     var wrapper = document.getElementById("equation");
     wrapper.innerHTML = `${newEqn}`
     document.getElementById("editButton").style.display = "inline";
@@ -190,6 +201,9 @@ async function displayFunction() {
     });
 }
 
+/*
+Submits changes to the server.
+*/
 async function submitChanges(data){
   var response = await(await fetch(`/formula/${fnID}/edit`, {
     method:"PATCH",
@@ -200,25 +214,10 @@ async function submitChanges(data){
 }
 
 /*
-* Should be called from the button associated with the function. 
-*/
-function editClicked(calledFrom) {
-  var parent = calledFrom.parentElement;
-  var allChildren = parent.allChildren;
-  console.log(parent);
-  console.log(allChildren);
-  var function_id = parent.id;
-  window.location.replace("/formula.html");
-  formula_contents = formula_contents[`${function_id}`]
-}
-
-/*
-To be called from the button next to the equation on the formula page. 
+To be called from the button next to the equation on the formula page. Allows editing of the funciton.
 */
 async function editFunction() {
-  console.log("edit event");
   var eqn = document.getElementById("equation");
-  console.log(eqn);
   //AUTH HERRE? 
   if(true) {
     var newInputHTML = 
@@ -242,8 +241,10 @@ async function editFunction() {
   }
 }
 
+/*
+Updates the equation to the new value.
+*/
 function updateEqn(id, newVal) {
-    console.log(`Starting update`);
     var wrapper = document.getElementById("equation");
     wrapper.innerHTML = `${newVal}`
     var editButton = document.getElementById("editButton");

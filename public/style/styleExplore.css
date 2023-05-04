@@ -91,7 +91,7 @@ a{
     color:inherit;
     text-decoration:none;
 }
-a:hover { 
+.topOptions:hover, #dashTitle:hover { 
     text-decoration: none; 
     color:#8BB174;
     cursor:pointer;
@@ -214,4 +214,11 @@ hr{
 .material-symbols-outlined {
     font-size: 30px;
     align-self: bottom;
+}
+
+.viewEdit:active {
+    -webkit-box-shadow: inset 0px 0px 5px #547241;
+    -moz-box-shadow: inset 0px 0px 5px #547241;
+    box-shadow: inset 0px 0px 5px #547241;
+   outline: none;
 }

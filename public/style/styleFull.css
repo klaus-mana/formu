@@ -189,9 +189,14 @@ a{
     color:inherit;
     text-decoration:none;
 }
-a:hover { 
+#profileOption:hover {
+    color:#FFFDFA;
+    cursor:pointer;
+}
+.topOptions:hover, .tags:hover, #dashTitle:hover { 
     text-decoration: none; 
-    color:#8BB174
+    color:#8BB174;
+    cursor:pointer;
 }
 
 #dashTitle {
@@ -286,4 +291,15 @@ a:hover {
 #addNew:hover{
     color:#1E151B;
     cursor:pointer;
+}
+
+.viewEdit:active {
+    -webkit-box-shadow: inset 0px 0px 5px #547241;
+    -moz-box-shadow: inset 0px 0px 5px #547241;
+    box-shadow: inset 0px 0px 5px #547241;
+   outline: none;
+}
+
+#outputPlace {
+    display:none;
 }

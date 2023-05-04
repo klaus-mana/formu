@@ -1,3 +1,7 @@
+/*
+Author: Bella Salter
+Purpose: To be used with signup.html for FormU.
+*/
 const form = document.getElementById('signupForm');
 form.addEventListener('submit', async (e) => {
     e.preventDefault();

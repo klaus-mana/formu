@@ -1,6 +1,6 @@
 html, body{
     margin:0;
-    font-family:'Gill Sans';
+    font-family:'Space Grotesk', 'serif';
     background-color: #FFFDFA
 }
 
@@ -25,7 +25,7 @@ h3{
 }
 #content {
     margin-top: 100px;
-    font-family: "Helvetica";
+    font-family: 'Space Mono', 'monospace';
     font-weight:lighter;
     width: 100vw;
     background-color:#FFFDFA;
@@ -38,14 +38,16 @@ h3{
     padding: 20px;
     font-weight:100;
     text-align:center;
-    margin:auto
+    margin:auto;
+    font-family:'Space Grotesk', 'serif'
 }
 
 #contentTitle {
     text-align:center;
     color:#426B69;
     padding: 0;
-    margin:auto
+    margin:auto;
+    font-family:'Space Grotesk', 'serif'
 }
 
 p{
@@ -64,7 +66,8 @@ p{
     margin: 30px;
     margin-bottom: 0px;
     font-size: 18px;
-    color:#FFFDFA
+    color:#FFFDFA;
+    font-family:'Space Mono', 'monospace';
 }
 
 #buttonDiv {
@@ -104,4 +107,14 @@ a:hover {
 p{
     margin: 5px;
     padding: 15px
+}
+#submitButton:hover {
+    cursor:pointer;
+}
+
+#submitButton:active {
+    -webkit-box-shadow: inset 0px 0px 5px #547241;
+    -moz-box-shadow: inset 0px 0px 5px #547241;
+    box-shadow: inset 0px 0px 5px #547241;
+   outline: none;
 }

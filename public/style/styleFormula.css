@@ -34,7 +34,8 @@ h3{
     background-color:#FFFDFA;
     color:#1E151B;
     padding-right: 40px;
-    margin-left:-40px
+    margin-left:-40px;
+    padding-bottom: 40px
 }
 #mainTitle{
     display:inline;
@@ -232,4 +233,17 @@ p {
     text-align:left;
     margin-top:20px;
     width: 50vw;
+}
+#editButton:active, #submitButton:active {
+    -webkit-box-shadow: inset 0px 0px 5px #547241;
+    -moz-box-shadow: inset 0px 0px 5px #547241;
+    box-shadow: inset 0px 0px 5px #547241;
+   outline: none;
+}
+
+#deleteButton:active {
+    -webkit-box-shadow: inset 0px 0px 5px #b75748;
+    -moz-box-shadow: inset 0px 0px 5px #b75748;
+    box-shadow: inset 0px 0px 5px #b75748;
+   outline: none;
 }

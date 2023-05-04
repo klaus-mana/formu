@@ -1,0 +1,89 @@
+
+#content {
+    margin-top: 100px;
+    font-family: "Space Mono", "monospace";
+    font-weight:lighter;
+    width: 100vw;
+    background-color:#FFFDFA;
+    color:#1E151B;
+    text-align:center;
+    z-index:-1;
+    margin-left:-230px
+}
+#mainTitle{
+    display:inline;
+    color:#FFFDFA;
+    padding: 20px;
+    font-weight:100;
+    text-align:center;
+    margin:auto
+}
+
+#contentTitle {
+    text-align:center;
+    color:#547241;
+    padding: 0;
+    margin:auto
+}
+
+
+#signupDiv {
+    background-color:#DDD9D4;
+    width: 30vw;
+    margin-left: 35vw;
+    margin-top: 20px;
+    border-radius: 25px;
+    opacity: 75%;
+    padding-top: 20px;
+}
+
+
+a{
+    color:inherit;
+    margin-bottom:15px;
+}
+a:hover { 
+    text-decoration: none; 
+    color:#8BB174
+}
+
+p{
+    /*margin: 5px;*/
+    /*padding: 15px;*/
+    text-align: left;
+    display:inline;
+}
+
+#details {
+    display:inline;
+    margin-left: 0vw;
+    margin-left: -50px;
+}
+
+#contentEdit {
+    margin-top: 100px;
+    padding-left:15px;
+}
+
+#viewDiv {
+    background-color:#DDD9D4;
+    width: 30vw;
+    margin-left: 35vw;
+    margin-top: 20px;
+    border-radius: 25px;
+    opacity: 75%;
+    padding-left:0.95vw
+}
+.titles {
+    display:inline;
+    width:6vw;
+    margin:0;
+    padding:0
+}
+.bottomDivs{
+    /*padding-top:20px;*/
+    padding-bottom:10px;
+    padding-top:10px;
+    margin-bottom:0px;
+    margin-top:0
+}
