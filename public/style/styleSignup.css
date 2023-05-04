@@ -1,7 +1,6 @@
 html, body{
     margin:0;
     font-family:"Space Grotesk", "serif";
-    background-color: #FFFDFA
 }
 
 #topSectionSignup {
@@ -13,7 +12,8 @@ html, body{
     padding-top: 17px;
     padding-bottom:17px;
     height:2.5em;
-    text-align:center
+    text-align:center;
+    font-family:"Space Grotesk", "serif";
 }
 
 h2{
@@ -25,12 +25,13 @@ h3{
 }
 #content {
     margin-top: 100px;
-    font-family: "Helvetica";
+    font-family: "Space Mono", "monospace";
     font-weight:lighter;
     width: 100vw;
     background-color:#FFFDFA;
     color:#1E151B;
     text-align:center;
+    z-index:-1;
 }
 #mainTitle{
     display:inline;
@@ -43,7 +44,7 @@ h3{
 
 #contentTitle {
     text-align:center;
-    color:#426B69;
+    color:#547241;
     padding: 0;
     margin:auto
 }
@@ -64,9 +65,13 @@ p{
     margin: 30px;
     margin-bottom:0px;
     font-size: 18px;
-    color:#FFFDFA
+    color:#FFFDFA;
+    font-family: "Space Mono", "monospace";
 }
 
+#submitButton:hover {
+    cursor:pointer;
+}
 #buttonDiv {
     text-align:center;
 }
@@ -135,4 +140,12 @@ p{
     opacity: 75%;
     padding-top: 20px;
     padding-left:40px
+}
+
+
+#submitButton:active {
+    -webkit-box-shadow: inset 0px 0px 5px #547241;
+    -moz-box-shadow: inset 0px 0px 5px #547241;
+    box-shadow: inset 0px 0px 5px #547241;
+   outline: none;
 }

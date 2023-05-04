@@ -24,7 +24,7 @@ h3{
     font-size:20px;
     font-weight:900;
     font-style:bold;
-    color:#426B69;
+    color:#547241;
 }
 #content {
     margin-top: 100px;
@@ -34,7 +34,8 @@ h3{
     background-color:#FFFDFA;
     color:#1E151B;
     padding-right: 40px;
-    margin-left:-40px
+    margin-left:-40px;
+    padding-bottom: 40px
 }
 #mainTitle{
     display:inline;
@@ -45,7 +46,7 @@ h3{
 }
 
 #formName {
-    color:#426B69;
+    color:#547241;
     font-size:24px;
     margin-left:15vw;
     padding:15px;
@@ -119,7 +120,7 @@ h3{
 }
 h4{
     font-style:bold;
-    color:#426B69
+    color:#547241
 }
 #runButton {
     background-color:#DDD9D4;
@@ -232,4 +233,17 @@ p {
     text-align:left;
     margin-top:20px;
     width: 50vw;
+}
+#editButton:active, #submitButton:active {
+    -webkit-box-shadow: inset 0px 0px 5px #547241;
+    -moz-box-shadow: inset 0px 0px 5px #547241;
+    box-shadow: inset 0px 0px 5px #547241;
+   outline: none;
+}
+
+#deleteButton:active {
+    -webkit-box-shadow: inset 0px 0px 5px #b75748;
+    -moz-box-shadow: inset 0px 0px 5px #b75748;
+    box-shadow: inset 0px 0px 5px #b75748;
+   outline: none;
 }

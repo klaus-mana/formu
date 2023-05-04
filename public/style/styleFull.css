@@ -100,7 +100,7 @@ h3{
     color:#1E151B;
     padding-top:10px;
     padding-left:10px;
-    color:#426B69;
+    color:#547241;
     font-style: normal;
     font-family:'Space Grotesk', sans-serif;
 }
@@ -128,7 +128,7 @@ h3{
     color:#1E151B
 }
 .formName {
-    color:#426B69;
+    color:#547241;
     padding-bottom:5px;
     margin-bottom:10px;
     font-size:18px;
@@ -153,9 +153,9 @@ h3{
 }
 
 hr{
-    color:#426B69;
+    color:#547241;
     position:absolute;
-    background-color:#426B69;
+    background-color:#547241;
     width: 58vw;
     align-self:center;
     height:4px;
@@ -189,9 +189,14 @@ a{
     color:inherit;
     text-decoration:none;
 }
-a:hover { 
+#profileOption:hover {
+    color:#FFFDFA;
+    cursor:pointer;
+}
+.topOptions:hover, .tags:hover, #dashTitle:hover { 
     text-decoration: none; 
-    color:#8BB174
+    color:#8BB174;
+    cursor:pointer;
 }
 
 #dashTitle {
@@ -286,4 +291,15 @@ a:hover {
 #addNew:hover{
     color:#1E151B;
     cursor:pointer;
+}
+
+.viewEdit:active {
+    -webkit-box-shadow: inset 0px 0px 5px #547241;
+    -moz-box-shadow: inset 0px 0px 5px #547241;
+    box-shadow: inset 0px 0px 5px #547241;
+   outline: none;
+}
+
+#outputPlace {
+    display:none;
 }

@@ -1,3 +1,9 @@
+<!--
+    File: viewProfile.html
+    Project: FormU CSC 337 Final Project
+    Author:Bella Salter
+    Purpose: Profile viewing page for FormU.
+-->
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -6,12 +12,12 @@
         <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300&family=Space+Mono:ital@0;1&display=swap" rel="stylesheet">
         <meta charset="utf-8">
         <title>Edit Profile</title>
-        <link id="cssFile" rel="stylesheet" type="text/css" href="./style/styleFull.css">
-        <link id="cssFile" rel="stylesheet" type="text/css" href="./style/styleSignup.css">
+        <link rel="stylesheet" type="text/css" href="./style/styleFull.css">
+        <link rel="stylesheet" type="text/css" href="./style/styleProfile.css">
     </head>
     <body>
         <div id="topSection">
-            <div id="leftSideTop"></div>
+            <div id="leftSideTop">
                 <h2 id="dashTitle"><a href="./dashboard.html">Dashboard</a></h2>
                 <h3 class="topOptions"><a href="./explore.html">Explore</a></h3>
                 <h3 class="topOptions"><a href="./help.html">Help</a></h3>
@@ -20,22 +26,18 @@
                 <h2 id="profileOption"><a href="./editProfile.html">My Profile</a></h2>
             </div>
         </div>
-        <div id="contentEdit">
+        <div id="content">
             <h2 id="contentTitle">Details</h2>
             <div id="viewDiv">
-            <div id="details">
-                <div class="bottomDivs"></div>
-                    <label for="userEnter">Username: </label>
-                    <p id="userEnter"></p>
-                </div>
-                <br>
                 <div class="bottomDivs">
-                    <label for="emailEnter">Email: </label>
-                    <p id="emailEnter"></p>
+                    <p class="titles">Username:</p><p id="userEnter"></p>
                 </div>
+                <div class="bottomDivs">
+                    <p class="titles">Email:</p><p id="emailEnter"></p>
+                </div>
+
             <a href="./dashboard-full.html"><p>return to dashboard</p></a>
             </div>
-        </div>
         </div>
         <script src="./scripts/scriptAccount.js"></script>
     </body>

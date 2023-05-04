@@ -1,3 +1,9 @@
+/*
+    File: app.js
+    Project: FormU CSC 337 Final Project
+    Author: Klaus Mana
+    Purpose: Serverside JS for running functions. 
+*/
 const evaluatex = require('evaluatex');
 const fs = require('fs');
 const readline = require('readline');

@@ -82,9 +82,9 @@ h3{
     padding-bottom:35px;
     padding-top: 40px
 }
-
+/*#547241*/
 .formName {
-    color:#426B69;
+    color:#547241;
     font-size:22px;
     font-weight: 900;
     margin-top: 50px;
@@ -103,9 +103,9 @@ h3{
 }
 
 hr{
-    color:#426B69;
+    color:#547241;
     position:absolute;
-    background-color:#426B69;
+    background-color:#547241;
     width: 80vw;
     align-self:center;
     height:4px;
@@ -157,7 +157,7 @@ a{
     color:inherit;
     text-decoration:none;
 }
-a:hover { 
+.topOptions:hover, #dashTitle:hover { 
     text-decoration: none; 
     color:#8BB174;
     cursor:pointer;
@@ -217,5 +217,17 @@ a:hover {
 
 #addNew:hover{
     color:#1E151B;
+    cursor:pointer;
+}
+
+.viewEdit:active {
+    -webkit-box-shadow: inset 0px 0px 5px #547241;
+    -moz-box-shadow: inset 0px 0px 5px #547241;
+    box-shadow: inset 0px 0px 5px #547241;
+   outline: none;
+}
+
+#profileOption:hover {
+    color:#FFFDFA;
     cursor:pointer;
 }

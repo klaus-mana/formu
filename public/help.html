@@ -1,3 +1,9 @@
+<!--
+    File: help.html
+    Project: FormU CSC 337 Final Project
+    Author:Bella Salter
+    Purpose: Help page for FormU.
+-->
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -7,12 +13,11 @@
         <link id="cssFile" rel="stylesheet" type="text/css" href="./style/styleHelp.css">
         <meta charset="utf-8">
         <title>Help</title>
-        <link id="cssFile" rel="stylesheet" type="text/css" href="styleHelp.css">
     </head>
     <body>
         <div id="topSection">
             <div id="leftSideTop">
-                <h2 id="dashTitle"><a href="./dashboard.html">Dashboard</a></h2>
+                <h2 class="topOptions" id="dashTitle"><a href="./dashboard.html">Dashboard</a></h2>
                 <h3 class="topOptions"><a href="./explore.html">Explore</a></h3>
                 <h3 class="topOptions" id="topHelpTitle"><a href='./help.html'>Help</a></h3>
             </div>
@@ -40,17 +45,23 @@
             </p>
             <br>
             <div class="imgDiv">
-                <img src="./images/formulaEdit.png"/>
+                <img src="./images/formulaEdit.png" alt="image of page"/>
             </div>
             <p>As you can see, you have the choice of entering a function here. Be sure to separate any multipied
                 variables with a multiplication operator, as the parser will not be able to tell if "mc" is one variable
-                or two! 
+                or two! Also, be sure to click submit whenever changes to the equation are made(this is to avoid accidental changes).
             </p>
-            <h4>Viewing All Functions</h4>
-            <p>When viewing all of your functions, they will automatically be sorted in alphabetical order. To view tagged functions, 
+            <h4>Viewing Functions</h4>
+            <p>When viewing all of your functions, they will automatically be sorted in order of creation. To view tagged functions, 
                 select the desired tag from the side menu. 
             </p>
-
+            <h4>Explore</h4>
+            <p>This page allows you to search functions. This search will search function names, tags, and descriptions.
+                To use a function created by another user, click <button class="viewEdit">Save</button> to add a copy to your account
+                first.
+            </p>
+            <h4>Profile Page</h4>
+            <p>From this page, you can view your profile details, including username and email.</p>
         </div>
     </body>
 </html>

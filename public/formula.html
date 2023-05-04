@@ -1,3 +1,9 @@
+<!--
+    File: formula.html
+    Project: FormU CSC 337 Final Project
+    Author:Bella Salter
+    Purpose: Formula viewing/editing/using page for FormU. 
+-->
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -18,7 +24,7 @@
         </div>
         <div id="content">
             <div id="titleDiv">
-                <input type="text" id="formName"></input>
+                <input type="text" id="formName"/>
                 <p id="formTag"></p>
                 <input placeholder="Add tag..." id="tagAdder"/>
             </div>
@@ -26,7 +32,6 @@
                 <span id="formula" class = "mathSpan">
                     <p class="math" id="equation"></p>
                 </span>
-                <!--<input type="text" id="formula">-->
                 <div id="buttonsDiv">
                     <button id="editButton">Edit</button>
                     <button id="submitButton">Submit</button>
@@ -41,7 +46,7 @@
                 <p>Simple input runs your function for one value per variable. Define the variables as comma separated
                     values here:
                 </p>
-                <input type="text" id="simpleInput" placeholder="x=1, y=2,..."/> <button id="runButton">Run!</button>
+                <input type="text" id="simpleInput" placeholder="x=1, y=2,..."/> <button id="runButton">Run!</button><p>Output:</p><input readonly id="outputPlace"/>
                 <br>
                 <br>
                 <h4 id="complexTitle">Dataset Input</h4>

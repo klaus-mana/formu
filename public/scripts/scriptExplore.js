@@ -1,20 +1,26 @@
+/*
+Author: Bella Salter
+Purpose: To be used with explore.html for FormU.
+*/
 var userId = "";
 var user = "";
 
+/*
+Loading MathJax
+*/
 window.onload = load_lib();
 function load_lib() {
   var script = document.createElement('script');
   script.type = 'text/javascript';
   script.async = true;
-  /*
-  script.onload = function () {
-    MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
-  };*/
   script.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML';
   var s = document.getElementsByTagName('script')[0];
   s.parentNode.insertBefore(script, s);
 };
 
+/*
+Checks user auth and adds necessary event listeners.
+*/
 window.onload = async function () {
     // ==== CHECK USER AUTH === //
     const authResponse = await (await fetch('/auth/check')).text();
@@ -28,11 +34,28 @@ window.onload = async function () {
     document.getElementById("searchButton").addEventListener("click", async () => {
         var results = await search();
     })
+    document.getElementById("search").addEventListener("keypress", async function(e) {
+        if(e.keyCode == 13) {
+            await search();
+        }
+    });
 }
 
+/*
+Does the search function with the current value of the search bar.
+To be called when event listeners for search triggered.
+*/
 async function search() {
     var content = document.getElementById("content");
     var searchTerm = document.getElementById("search").value;
+    content.innerHTML = 
+    `
+    <h3 id="bigTitle">Search</h3>
+            <div id="searchWrapper">
+                <input type="text" id="search" placeholder="Search">
+                <a id="searchButton" ><span class="material-symbols-outlined">search</span></a>
+            </div>
+    `;
     console.log(`Searching for ${searchTerm}.`)
     var reqBody = {
         term : searchTerm
@@ -52,11 +75,23 @@ async function search() {
     }
     content.innerHTML = content.innerHTML + new_HTML;
     addListenersToButtons();
+    document.getElementById("searchButton").addEventListener("click", async() => {
+        await search();
+    });
+    document.getElementById("search").addEventListener("keypress", async function(e) {
+        if(e.keyCode == 13) {
+            await search();
+        }
+    });
     //console.log(response);
 }
 
+/*
+Formats a dictionary to be easily used from the response from a search request.
+*/
 function createSearchDict(response) {
     var retDict = {};
+    console.log(response);
     for(var formula of response) {
         var mine = (formula.user_id == userId);
         retDict[`${formula._id}`] = [`${formula.raw_latex}`, `${formula.name}`, `${formula.tags}`, mine];
@@ -64,13 +99,12 @@ function createSearchDict(response) {
     return retDict;
 }
 
+/*
+Shows the input dictionary on the page.
+*/
 function showDict(latexDict) {
-    //temporary
-    //console.log("showing");
     var contentDiv = document.getElementById("content");
-    /*console.log(latexDict);*/
     for (var fn of Object.keys(latexDict)) {
-      //console.log(fn);
       var current = latexDict[fn];
       var thisDiv = document.createElement("div");
       thisDiv.setAttribute("class", "function");
@@ -102,34 +136,40 @@ function showDict(latexDict) {
         </div>
       `;
       }
-      /*
-      console.log(newElement);*/
       contentDiv.innerHTML = contentDiv.innerHTML + newElement;
-      //var buttonElement = document.getElementById(`${fn}`)
       MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
     }
 }
 
+/*
+Adds the necessary listeners to buttons on the page, depending on whether or not it is one of the
+current user's functions.
+*/
 function addListenersToButtons() {
     var buttons = document.getElementsByClassName("viewEdit");
     for (const b of buttons) {
-     console.log(b.id.includes("other"));
+     //console.log(b.id.includes("other"));
      b.addEventListener('click', async () => {
-       console.log("CLICKED!");
+       //console.log("CLICKED!");
        if(b.id.includes("other")) {
-           console.log("o");
+           //console.log("o");
            addToAccount(b);
        } else {
-           console.log("yo");
+           //console.log("yo");
            editClicked(b);
        }
     });
     }
 }
+
+/*
+Adds the function to the current account. 
+Called from the Save button on a function not owned by the current user.
+*/
 async function addToAccount(b) {
-    var fnIdStart = b.indexOf("_");
-    var fnId = b.substring(fnIdStart+1, b.size());
-    var otherUserId = "6452ad4081ca31753412925d";
+    var fnIdStart = b.id.indexOf("_");
+    var fnId = b.id.substring(fnIdStart+1, b.id.length);
+    console.log(`Adding ${fnId}`);
     var response = await(await fetch(`/formula/${fnId}`, {
         method:"GET"
       })).json();
@@ -146,17 +186,22 @@ async function addToAccount(b) {
         headers: {"Content-Type": "application/json"},
         body: JSON.stringify(reqBody)
       })).json();
-    console.log(response);
+      var req2 = {
+        form_id : response._id
+      };
+      var response2 = await fetch(`/user/${userId}/save`, {
+        method : "PATCH",
+        headers:{"Content-Type": "application/json"},
+        body:JSON.stringify(req2)
+      });
+    
 }
 
-
+/*
+Goes to the page to edit the function.
+To be called from the edit buttons
+*/
 function editClicked(calledFrom) {
-    //console.log("here");
-    //console.log("calledFrom" + calledFrom.id);
-    //var parent = calledFrom.parentElement;
-    //var allChildren = parent.allChildren;
-    //console.log(`PAREnt : ${parent}`);
-    //console.log(allChildren);
     var function_id = calledFrom.id;
     console.log(function_id);
     window.location.replace("/formula.html" + `?id=${function_id}`);

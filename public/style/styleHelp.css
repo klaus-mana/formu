@@ -47,6 +47,10 @@ h3{
     width:50%
 }
 
+#profileOption:hover {
+    color:#FFFDFA;
+    cursor:pointer;
+}
 #rightSideTop{
     display:inline;
     position:fixed;
@@ -85,7 +89,7 @@ h3{
 }
 
 h4 {
-    color:#426B69;
+    color:#547241;
     padding-bottom:0px;
     margin-bottom:0px;
     padding-left: 40px;
@@ -102,9 +106,11 @@ a{
     color:inherit;
     text-decoration:none;
 }
-a:hover { 
+
+.topOptions:hover, #dashTitle:hover, #topHelpTitle:hover { 
     text-decoration: none; 
-    color:#8BB174
+    color:#8BB174;
+    cursor:pointer;
 }
 
 .viewEdit{
