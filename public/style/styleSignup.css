@@ -1,11 +1,11 @@
 html, body{
     margin:0;
     font-family:"Space Grotesk", "serif";
-    background-color: #FFFDFA
 }
 
 #topSectionSignup {
-    background-image: linear-gradient(to right, #FF8370, #1E151B);
+    /*background-image: linear-gradient(to right, #FF8370, #1E151B);*/
+    background-color:#547241;
     position:fixed;
     top:0;
     width:100vw;
@@ -13,7 +13,8 @@ html, body{
     padding-top: 17px;
     padding-bottom:17px;
     height:2.5em;
-    text-align:center
+    text-align:center;
+    font-family:"Space Grotesk", "serif";
 }
 
 h2{
@@ -31,6 +32,7 @@ h3{
     background-color:#FFFDFA;
     color:#1E151B;
     text-align:center;
+    z-index:-1;
 }
 #mainTitle{
     display:inline;
@@ -43,7 +45,7 @@ h3{
 
 #contentTitle {
     text-align:center;
-    color:#426B69;
+    color:#547241;
     padding: 0;
     margin:auto
 }

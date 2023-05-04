@@ -82,9 +82,9 @@ h3{
     padding-bottom:35px;
     padding-top: 40px
 }
-
+/*#547241*/
 .formName {
-    color:#426B69;
+    color:#547241;
     font-size:22px;
     font-weight: 900;
     margin-top: 50px;
@@ -103,9 +103,9 @@ h3{
 }
 
 hr{
-    color:#426B69;
+    color:#547241;
     position:absolute;
-    background-color:#426B69;
+    background-color:#547241;
     width: 80vw;
     align-self:center;
     height:4px;

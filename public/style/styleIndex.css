@@ -1,7 +1,12 @@
 html, body{
     margin:0;
     font-family:'Gill Sans';
-    background-color: #FFFDFA
+    background-color: #FFFDFA;    
+    background: url("../images/landing2.png") no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
 }
 
 #topSection {
@@ -13,7 +18,8 @@ html, body{
     padding-top: 17px;
     padding-bottom:17px;
     height:2.5em;
-    text-align:center
+    text-align:center;
+    font-family:"Space Grotesk", "serif";
 }
 
 h2{
@@ -23,13 +29,15 @@ h2{
 h3{
     font-size:20px
 }
+
 #content {
-    margin-top: 100px;
-    font-family: "Helvetica";
+    margin-top: 75px;
+    font-family: "Space Mono", "monospace";
     font-weight:lighter;
     width: 100vw;
-    background-color:#FFFDFA;
-    color:#1E151B
+   /*background-color:#FFFDFA;*/
+    color:#1E151B;
+    padding:0;
 }
 #mainTitle{
     display:inline;
@@ -66,12 +74,30 @@ input {
 
 #buttonDiv {
     text-align:center;
+    position:fixed;
+    left:90px;
+    top:72vh
 }
 
-form{
-    display:inline
+a{
+    display:inline;
+    font-size:22px;
+    color:inherit;
+    text-decoration:underline;
 }
-
+/*
 #graphics {
     background-image:url("../images/landing.png");
+    img-height:
+    width:100vw;
+    height:56.25vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden
+}*/
+
+
+a:hover{
+   color:#8BB174
 }

@@ -100,7 +100,7 @@ h3{
     color:#1E151B;
     padding-top:10px;
     padding-left:10px;
-    color:#426B69;
+    color:#547241;
     font-style: normal;
     font-family:'Space Grotesk', sans-serif;
 }
@@ -128,7 +128,7 @@ h3{
     color:#1E151B
 }
 .formName {
-    color:#426B69;
+    color:#547241;
     padding-bottom:5px;
     margin-bottom:10px;
     font-size:18px;
@@ -153,9 +153,9 @@ h3{
 }
 
 hr{
-    color:#426B69;
+    color:#547241;
     position:absolute;
-    background-color:#426B69;
+    background-color:#547241;
     width: 58vw;
     align-self:center;
     height:4px;

@@ -24,7 +24,7 @@ h3{
     font-size:20px;
     font-weight:900;
     font-style:bold;
-    color:#426B69;
+    color:#547241;
 }
 #content {
     margin-top: 100px;
@@ -45,7 +45,7 @@ h3{
 }
 
 #formName {
-    color:#426B69;
+    color:#547241;
     font-size:24px;
     margin-left:15vw;
     padding:15px;
@@ -119,7 +119,7 @@ h3{
 }
 h4{
     font-style:bold;
-    color:#426B69
+    color:#547241
 }
 #runButton {
     background-color:#DDD9D4;
