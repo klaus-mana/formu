@@ -13,7 +13,7 @@ const multerStorage = multer.diskStorage({
       cb(null, './csv_files');
     },
     filename: function(req, file, cb) {
-      cb(null, `${req.body.user_id}-${file.originalname}`);
+      cb(null, `${req.session.user_id}-${file.originalname}`);
     }
   });
 const upload = multer({ storage: multerStorage });
@@ -245,7 +245,7 @@ app.post('/formula/:id/run/simple', async (req, res) => {
         const start_problem = formula.raw_latex.indexOf("(");
         const end_problem = formula.raw_latex.length - 2;
         const run_eqn = formula.raw_latex.substring(start_problem+1, end_problem).trim();
-        console.log(run_eqn);
+
         const runnable = utils.getRunnable(run_eqn); //Lexer whatever is here, fixed with above string formatting
         const result = runnable(req.body);//now getting: mc not numbers here, this was due to not having *
         res.status(200).send(JSON.stringify(result));
@@ -255,18 +255,35 @@ app.post('/formula/:id/run/simple', async (req, res) => {
     }
 });
 
-app.post('/formula/:id/run/file', upload.single('file'), async (req, res) => {
-   const formula = await Formula.findOne({id: req.params.id});
-   const vars = await utils.getInput(req.file.filename);
-   const outfile = await utils.getOutput(formula.raw_latex, vars, req.file.filename);
+app.post('/formula/:id/run/file', async (req, res) => {
+    upload.single('file')(req, res, async (e) => {
+        if (e) {
+            console.log(`\n💥 Server Error in /formula/${req.params.id}/run/file: ${e}\n`);
+            res.status(500).send('Error Uploading File');
+        }
 
-   res.download(outfile, (e) => {
-    if (e) {
-        console.log(`\n💥 Server Error in /formula/${req.params.id}/run/file: ${e}\n`);
-    } else {
-        utils.cleanup(req.file.filename);
-    }
-   });
+        try {
+            const formula = await Formula.findOne({_id: req.params.id});
+            const vars = await utils.getInput(`./csv_files/${req.file.filename}`);
+
+            const start_problem = formula.raw_latex.indexOf("(");
+            const end_problem = formula.raw_latex.length - 2;
+            const run_eqn = formula.raw_latex.substring(start_problem+1, end_problem).trim();
+
+            const outfile = await utils.getOutput(run_eqn, vars, `./csv_files/${req.file.filename}`);
+
+            res.download(outfile, (e) => {
+                if (e) {
+                    console.log(`\n💥 Server Error in /formula/${req.params.id}/run/file: ${e}\n`);
+                } else {
+                    utils.cleanup(`./csv_files/${req.file.filename}`);
+                }
+            });
+        } catch (e) {
+            console.log(`\n💥 Server Error in /formula/${req.params.id}/run/file: ${e}\n`);
+            res.status(500).send('Error Getting Results');
+        }
+    });
 });
 
 app.listen(port, async ()  => {
