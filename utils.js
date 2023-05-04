@@ -71,11 +71,11 @@ module.exports = {
 
         fs.unlink(filename, (e) => {
             if (e) {
-                console.error(`Error deleting ${filename}`);
+                console.error(`Error deleting ${filename} - ${e}`);
             } else {
                 fs.unlink(outname, (e) => {
                     if (e) {
-                        console.error(`Error deleting ${outname}`);
+                        console.error(`Error deleting ${outname} - ${e}`);
                     }
                 });
             }

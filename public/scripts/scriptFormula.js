@@ -49,10 +49,34 @@ window.addEventListener("load", () => {
   });
   document.getElementById("runButton").addEventListener("click", () => {
     useSimple();
-  })
+  });
+
+  const fileRunForm = document.getElementById('fileRunForm');
+  fileRunForm.addEventListener('submit', async (event) => {
+  event.preventDefault();
+
+  const data = new FormData(fileRunForm);
+
+  const response = await fetch(`/formula/${fnID}/run/file`, {
+    method: 'POST',
+    body: data
+   });
+
+    if (response.ok) {
+      const blob = await response.blob();
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'result.csv';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    } else {
+      console.log(await response.text());
+    }
+  });
   
 });
-
 
 async function useSimple() {
   var input = document.getElementById("simpleInput").value;
